@@ -113,15 +113,22 @@ nav.container{display:flex;align-items:center;justify-content:space-between;gap:
   transition:opacity .3s var(--ease);
 }
 .brand:hover{opacity:.86;}
+/* Explicit width AND height: inline SVG with width:auto collapses to 0 in
+   WebKit, and the global svg{max-width:100%} reset compounds it inside a
+   shrink-to-fit flex container. Widths track the 268:78 viewBox ratio. */
 .brand-logo{
-  height:46px;width:auto;
+  height:46px;width:158px;
+  max-width:none;flex-shrink:0;
+  aspect-ratio:268/78;
   display:block;
-  filter:drop-shadow(0 2px 10px rgba(201,161,59,0.18));
-  transition:height .4s var(--ease);
+  transition:height .4s var(--ease), width .4s var(--ease);
 }
-header.scrolled .brand-logo{height:40px;}
-@media(max-width:600px){.brand-logo{height:38px;}}
-.footer-brand .brand-logo{height:54px;}
+header.scrolled .brand-logo{height:40px;width:137px;}
+@media(max-width:600px){
+  .brand-logo{height:38px;width:131px;}
+  header.scrolled .brand-logo{height:34px;width:117px;}
+}
+.footer-brand .brand-logo{height:54px;width:186px;}
 .nav-links{display:none;align-items:center;gap:30px;}
 @media(min-width:1120px){.nav-links{display:flex;}}
 .nav-links > li > a,
