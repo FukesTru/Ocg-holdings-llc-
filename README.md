@@ -5,6 +5,29 @@ The design system (dark charcoal + gold, Cormorant Garamond / Inter) originates
 from the approved homepage and is shared across every page via
 `assets/css/styles.css` and `assets/js/main.js`.
 
+## Deploy on Vercel
+
+The repo is ready to import as-is — no build step, no framework.
+
+1. Go to [vercel.com/new](https://vercel.com/new) and sign in (with GitHub is easiest).
+2. Import the `FukesTru/Ocg-holdings-llc-` repository (grant the Vercel GitHub
+   app access to it if prompted).
+3. Leave every setting at its default: Framework Preset **Other**, no Build
+   Command, no Output Directory override. Click **Deploy**.
+4. In under a minute you'll get a live `*.vercel.app` URL. Every future push
+   to the production branch redeploys automatically; pushes to other branches
+   get their own preview URLs.
+
+`vercel.json` is already configured: **clean URLs** (pages are served at
+`/about`, `/services/fractional-cfo`, etc. — all internal links use this
+form), long-lived caching for `/assets/*`, and standard security headers.
+To attach the real domain later, add it under Project → Settings → Domains
+and update the canonical base (see below).
+
+CLI alternative: `npm i -g vercel && vercel` from the repo root.
+
+Local preview that mirrors Vercel's clean-URL behavior: `npx serve .`
+
 ## Structure
 
 | Path | Purpose |
