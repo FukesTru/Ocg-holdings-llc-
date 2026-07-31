@@ -36,12 +36,30 @@ Local preview that mirrors Vercel's clean-URL behavior: `npx serve .`
 | `about.html`, `contact.html`, `faqs.html`, `industries.html`, `case-studies.html`, `resources.html` | Core pages |
 | `privacy-policy.html`, `terms-of-service.html` | Legal |
 | `services/*.html` | Six dedicated service pages (CFO, bookkeeping, tax, funding, strategy, fractional CFO) |
-| `locations/*.html` | Six Florida SEO landing pages (Miami, Orlando, Tampa, Jacksonville, Fort Lauderdale, West Palm Beach) |
+| `locations/index.html` | Service-locations hub (nationwide) |
+| `locations/*.html` | 14 city SEO landing pages — national: New York, Los Angeles, Chicago, Dallas, Houston, Atlanta, Austin, Denver; Florida: Miami, Orlando, Tampa, Jacksonville, Fort Lauderdale, West Palm Beach |
 | `resources/*.html` | Insight articles |
 | `sitemap.xml`, `robots.txt` | SEO plumbing (canonical base: `https://www.ocgfinancial.com/`) |
 
+## Brand logo
+
+The header/footer lockup is an inline SVG (arc + rising bars + breakout arrow,
+"OCG" wordmark, rules-flanked "FINANCIAL"), rebuilt as vector art so it stays
+sharp at any size and matches the site's gold gradient. A standalone copy lives
+at `assets/img/ocg-logo.svg`; the favicon uses the mark alone.
+
+To use the original raster artwork instead, drop the file at
+`assets/img/ocg-logo.png` and replace the `<svg class="brand-logo">…</svg>`
+block in the header and footer of each page with:
+
+```html
+<img class="brand-logo" src="/assets/img/ocg-logo.png" alt="OCG Financial">
+```
+
 ## Notes before launch
 
+- The logo is a vector re-creation of the supplied artwork — swap in the
+  original file (see above) if exact reproduction matters.
 - Founder photo and client logos are hotlinked from OCG's Wix CDN — rehost locally.
 - The contact form is handled client-side only; wire its submit to the CRM/booking backend.
 - Video cards on the homepage are marked "Coming Soon" pending approved embeds.

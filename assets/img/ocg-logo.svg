@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="9 11 263 78" role="img" aria-label="OCG Financial">
+  <title>OCG Financial</title>
+  <defs>
+    <linearGradient id="ocgGold" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#fbeab4"/>
+      <stop offset="28%" stop-color="#f0d078"/>
+      <stop offset="58%" stop-color="#c9a13b"/>
+      <stop offset="100%" stop-color="#8a6d24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Mark: growth arc, rising bars, breakout arrow -->
+  <g transform="translate(2,8) scale(0.92)" fill="url(#ocgGold)">
+    <path d="M10,64 A40,40 0 0 1 72.9,31.2" fill="none" stroke="url(#ocgGold)" stroke-width="11" stroke-linecap="butt"/>
+    <rect x="24" y="51" width="6" height="13" rx="1"/>
+    <rect x="33" y="41" width="6" height="23" rx="1"/>
+    <rect x="42" y="33" width="6" height="31" rx="1"/>
+    <rect x="51" y="39" width="6" height="25" rx="1"/>
+    <rect x="60" y="35" width="6" height="29" rx="1"/>
+    <rect x="69" y="45" width="6" height="19" rx="1"/>
+    <path d="M22,55 L36,43 L47,48 L60,34 L78,17" fill="none" stroke="url(#ocgGold)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="90,6 85.1,23.7 72.3,10.9"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="106" y="56" fill="url(#ocgGold)"
+        font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800"
+        font-size="46" letter-spacing="1.5">OCG</text>
+
+  <!-- FINANCIAL with flanking rules -->
+  <rect x="107" y="76" width="14" height="2" fill="url(#ocgGold)"/>
+  <text x="129" y="82" fill="url(#ocgGold)"
+        font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="500"
+        font-size="15" letter-spacing="5.4">FINANCIAL</text>
+  <rect x="256" y="76" width="14" height="2" fill="url(#ocgGold)"/>
+</svg>

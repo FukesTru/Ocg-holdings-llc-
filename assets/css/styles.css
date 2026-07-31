@@ -108,30 +108,20 @@ header.scrolled{
 }
 nav.container{display:flex;align-items:center;justify-content:space-between;gap:20px;}
 .brand{
-  font-family:var(--serif);
-  font-size:24px;
-  font-weight:600;
-  letter-spacing:0.01em;
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;
   flex-shrink:0;
+  transition:opacity .3s var(--ease);
 }
-.brand .mark{
-  width:40px;height:40px;
-  border:1px solid var(--hairline-strong);
-  border-radius:4px;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--serif);
-  font-size:14px;
-  letter-spacing:0.04em;
-  color:var(--gold);
-  position:relative;
-  background:linear-gradient(155deg,var(--charcoal-3),var(--black));
+.brand:hover{opacity:.86;}
+.brand-logo{
+  height:46px;width:auto;
+  display:block;
+  filter:drop-shadow(0 2px 10px rgba(201,161,59,0.18));
+  transition:height .4s var(--ease);
 }
-.brand .mark::after{
-  content:"";position:absolute;inset:4px;
-  border:1px solid rgba(212,175,55,0.22);
-  border-radius:2px;
-}
+header.scrolled .brand-logo{height:40px;}
+@media(max-width:600px){.brand-logo{height:38px;}}
+.footer-brand .brand-logo{height:54px;}
 .nav-links{display:none;align-items:center;gap:30px;}
 @media(min-width:1120px){.nav-links{display:flex;}}
 .nav-links > li > a,
@@ -182,6 +172,12 @@ nav.container{display:flex;align-items:center;justify-content:space-between;gap:
 .drop-panel a:hover{background:rgba(212,175,55,0.07);color:var(--text);transform:translateX(3px);}
 .drop-panel a .d-sub{display:block;font-size:12px;color:var(--text-mute);margin-top:3px;font-weight:400;}
 .drop-panel a:hover .d-sub{color:var(--text-dim);}
+.drop-panel.wide{min-width:470px;padding:16px 14px 12px;}
+.drop-cols{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px;align-items:start;}
+.drop-label{font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:700;padding:6px 14px 8px;}
+.drop-panel.wide a{padding:8px 14px;font-size:13.5px;}
+.drop-all{display:block;margin-top:10px;border-top:1px solid var(--hairline);padding:12px 14px 4px !important;color:var(--gold) !important;font-size:12px !important;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;}
+.drop-all:hover{background:none !important;}
 
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
