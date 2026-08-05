@@ -5,7 +5,7 @@
       <stop offset="0%" stop-color="#fbeab4"/>
       <stop offset="28%" stop-color="#f0d078"/>
       <stop offset="58%" stop-color="#c9a13b"/>
-      <stop offset="100%" stop-color="#8a6d24"/>
+      <stop offset="100%" stop-color="#c9a13b"/>
     </linearGradient>
   </defs>
 

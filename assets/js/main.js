@@ -78,7 +78,7 @@
   });
 
   /* Scroll reveal */
-  var revealEls = document.querySelectorAll('.reveal, .process-step, .sec-divider, .founder-photo');
+  var revealEls = document.querySelectorAll('.reveal, .process-step, .sec-divider, .founder-photo, .journey');
   if ('IntersectionObserver' in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
