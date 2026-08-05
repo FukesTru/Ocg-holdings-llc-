@@ -923,3 +923,163 @@ footer{background:#040404;border-top:1px solid var(--hairline);padding:80px 0 30
   .reveal{opacity:1;transform:none;}
   .sec-divider{transform:scaleX(1);}
 }
+
+/* ================================================================
+   PREMIUM PROOF BAND — headline credibility stats
+   ================================================================ */
+.proof-band{
+  position:relative;border:1px solid var(--hairline);border-radius:18px;
+  background:
+    radial-gradient(ellipse 55% 100% at 88% 0%, rgba(201,161,59,0.11), transparent 62%),
+    linear-gradient(160deg,#17171a,#0b0b0d);
+  padding:56px 44px 48px;overflow:hidden;
+}
+.proof-band::before{
+  content:"";position:absolute;top:0;left:-55%;width:32%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(240,208,120,0.05),transparent);
+  animation:sweep 11s ease-in-out infinite;pointer-events:none;
+}
+.proof-grid{display:grid;grid-template-columns:1fr;gap:36px 28px;position:relative;z-index:1;}
+@media(min-width:640px){.proof-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1040px){.proof-grid{grid-template-columns:repeat(4,1fr);}}
+.proof-item{position:relative;padding-left:0;}
+@media(min-width:1040px){
+  .proof-item{padding-left:30px;border-left:1px solid var(--hairline);}
+  .proof-item:first-child{padding-left:0;border-left:none;}
+}
+.proof-item .pnum{
+  font-family:var(--serif);font-size:clamp(44px,4.6vw,60px);line-height:1;
+  background:linear-gradient(150deg,var(--gold-bright),var(--gold) 55%,var(--gold-dim));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  display:block;
+}
+.proof-item .prule{width:26px;height:1px;background:var(--gold);margin:16px 0 14px;
+  transition:width .7s var(--ease);}
+.proof-item:hover .prule{width:62px;}
+.proof-item .plabel{font-size:14.5px;color:var(--text-dim);line-height:1.5;font-weight:500;max-width:210px;}
+.proof-foot{
+  position:relative;z-index:1;margin-top:44px;padding-top:26px;border-top:1px solid var(--hairline);
+  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;text-align:center;
+}
+.proof-foot .pf-num{font-family:var(--serif);font-size:20px;color:var(--gold-bright);}
+.proof-foot .pf-lbl{font-size:12.5px;letter-spacing:0.13em;text-transform:uppercase;color:var(--text-mute);font-weight:600;}
+.proof-foot .pf-sep{color:var(--gold-dim);}
+
+/* Compact variant for service pages */
+.proof-band.compact{padding:42px 36px;}
+.proof-band.compact .pnum{font-size:clamp(36px,3.6vw,46px);}
+.proof-band.compact .plabel{font-size:13.5px;}
+
+/* ================================================================
+   PRICING
+   ================================================================ */
+.price-grid{display:grid;grid-template-columns:1fr;gap:24px;}
+@media(min-width:860px){.price-grid{grid-template-columns:repeat(3,1fr);}}
+.price-card{
+  position:relative;border:1px solid var(--hairline);border-radius:16px;
+  background:linear-gradient(165deg,#151517,#0b0b0d);
+  padding:38px 32px 34px;display:flex;flex-direction:column;
+  transition:border-color .4s var(--ease), transform .4s var(--ease), background .4s var(--ease);
+}
+.price-card:hover{border-color:var(--hairline-strong);transform:translateY(-5px);}
+.price-card.featured{
+  border-color:var(--hairline-strong);
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(201,161,59,0.12), transparent 62%),
+    linear-gradient(165deg,#191919,#0c0c0e);
+}
+.price-card .p-flag{
+  position:absolute;top:-1px;right:24px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;
+  font-weight:700;color:#0a0a0a;background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+  padding:5px 12px;border-radius:0 0 5px 5px;
+}
+.price-card .p-svc{font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);font-weight:700;}
+.price-card h3{font-family:var(--serif);font-size:25px;margin:12px 0 20px;line-height:1.2;}
+.price-card .p-amt{display:flex;align-items:flex-end;gap:9px;padding-bottom:22px;border-bottom:1px solid var(--hairline);}
+.price-card .p-from{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-mute);font-weight:600;padding-bottom:9px;}
+.price-card .p-val{font-family:var(--serif);font-size:44px;line-height:1;color:var(--gold-bright);}
+.price-card ul{margin:22px 0 26px;flex-grow:1;}
+.price-card ul li{font-size:15px;color:var(--text-dim);padding:9px 0;display:flex;gap:12px;line-height:1.6;}
+.price-card ul li::before{content:"✓";color:var(--gold);flex-shrink:0;font-size:13px;margin-top:3px;}
+.price-note{margin-top:30px;font-size:13.5px;color:var(--text-mute);line-height:1.7;max-width:620px;}
+
+/* ================================================================
+   EMBED SLOTS — reserved for GoHighLevel forms / calendars
+   ================================================================ */
+.embed-slot{
+  border:1px dashed var(--hairline-strong);border-radius:14px;
+  background:linear-gradient(160deg,rgba(28,28,31,0.55),rgba(10,10,11,0.7));
+  padding:38px 30px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+}
+.embed-slot.tall{min-height:430px;}
+.embed-slot .es-tag{
+  font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;color:var(--gold);
+  border:1px solid var(--hairline-strong);border-radius:20px;padding:6px 15px;
+}
+.embed-slot .es-ico{color:var(--gold-dim);}
+.embed-slot h3{font-family:var(--serif);font-size:21px;color:var(--text);}
+.embed-slot p{font-size:14.5px;color:var(--text-mute);max-width:400px;line-height:1.65;}
+.embed-slot code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
+  color:var(--gold-bright);background:rgba(201,161,59,0.08);
+  border:1px solid var(--hairline);border-radius:6px;padding:8px 14px;
+  display:inline-block;letter-spacing:0.01em;
+}
+.field-pending{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
+  color:var(--text-mute);background:rgba(255,255,255,0.03);
+  border:1px dashed var(--hairline);border-radius:5px;padding:3px 9px;display:inline-block;
+}
+
+/* Video placeholder state */
+.video-card.pending .video-thumb{background:linear-gradient(150deg,#191919,#0a0a0b);}
+.video-card.pending .play-btn{opacity:0.45;}
+.video-topics{display:grid;grid-template-columns:1fr;gap:1px;background:var(--hairline);
+  border:1px solid var(--hairline);border-radius:14px;overflow:hidden;}
+@media(min-width:700px){.video-topics{grid-template-columns:repeat(3,1fr);}}
+.video-topic{background:var(--charcoal);padding:26px 24px;transition:background .35s var(--ease);}
+.video-topic:hover{background:var(--charcoal-2);}
+.video-topic .vt-n{font-family:var(--serif);font-size:13px;color:var(--gold-dim);letter-spacing:0.08em;}
+.video-topic h3{font-size:18.5px;margin:10px 0 8px;line-height:1.3;}
+.video-topic p{font-size:14px;color:var(--text-dim);line-height:1.65;}
+
+/* ----------------------------------------------------------------
+   Narrow-viewport safety: grid children must be allowed to shrink
+   below their min-content, otherwise a wide track pushes the page
+   into horizontal scroll.
+   ---------------------------------------------------------------- */
+.fit-grid > *, .benefit-grid > *, .related-row > *, .price-grid > *,
+.proof-grid > *, .industry-grid > *, .service-grid > *, .post-grid > *,
+.t-grid > *, .video-grid > *, .video-topics > *, .phi-grid > *,
+.case-grid > *, .steps-flow > *, .contact-grid > *{min-width:0;}
+.fit-card ul li, .benefit-card p, .check-list li, .phi-card ul li,
+.gp-row .k, .article-body li{overflow-wrap:break-word;}
+
+@media(max-width:560px){
+  .container{padding:0 20px;}
+  .fit-card{padding:30px 22px;}
+  .phi-card{padding:30px 22px;}
+  .benefit-card{padding:30px 22px;}
+  .glass-panel{padding:30px 22px;}
+  .proof-band{padding:38px 22px 32px;}
+  .proof-band.compact{padding:32px 22px;}
+  .price-card{padding:32px 24px 28px;}
+  .cta-band{padding:36px 24px;}
+  .footer-cta{padding:32px 24px;}
+  .step-row{padding:28px 22px;gap:16px;}
+  .case-main, .case-stats{padding:32px 24px;}
+  .embed-slot{padding:30px 20px;}
+}
+
+/* Long inline links must break rather than force the page wide */
+.article-body a, .body-copy a, .faq-item .faq-body a,
+.legal-body a, .plabel, .contact-way p{overflow-wrap:break-word;}
+
+/* Decorative orbs are purely visual: drop them on small screens, where
+   they add paint cost and can escape their clipping context. */
+@media(max-width:640px){.orb{display:none;}}
+
+/* Belt and braces against horizontal scroll on very narrow viewports */
+.page-hero, .sec, .hero, .philosophy, .services, .trust,
+.process, .videos, .testimonials, .founder, .final-cta{overflow-x:clip;}
