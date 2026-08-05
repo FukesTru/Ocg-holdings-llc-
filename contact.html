@@ -16,8 +16,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/styles.css?v=13f3905d">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FinancialService", "name": "OCG Financial", "legalName": "OCG Holdings LLC", "url": "https://www.ocgfinancial.com/", "description": "Founder-led financial partner for business owners nationwide: fractional CFO services, bookkeeping, tax support, business funding, and financial strategy.", "areaServed": {"@type": "Country", "name": "United States"}, "founder": {"@type": "Person", "name": "Oscar Cancino", "sameAs": "https://www.linkedin.com/in/oscar-cancino-056694174/"}, "sameAs": ["https://www.linkedin.com/in/oscar-cancino-056694174/"]}</script>
+<link rel="stylesheet" href="/assets/css/styles.css?v=b8fdc862">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FinancialService", "name": "OCG Financial", "legalName": "OCG Holdings LLC", "url": "https://www.ocgfinancial.com/", "description": "Founder-led financial partner for business owners nationwide: fractional CFO services, bookkeeping, tax support, business funding, and financial strategy.", "areaServed": {"@type": "Country", "name": "United States"}, "founder": {"@type": "Person", "name": "Oscar Cancino", "sameAs": "https://www.linkedin.com/in/oscar-cancino-056694174/"}, "sameAs": ["https://www.linkedin.com/in/oscar-cancino-056694174/"], "telephone": "+12104163919", "email": "oscar@ocgfinancial.com", "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "telephone": "+12104163919", "email": "oscar@ocgfinancial.com", "areaServed": "US", "availableLanguage": "English"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.ocgfinancial.com/"}, {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.ocgfinancial.com/contact"}]}</script>
 </head>
 <body>
@@ -116,10 +116,12 @@
 
 <main>
 <!--
-  The form below is styled and validated client-side. Its submit handler
-  shows a confirmation state only.
-  [Connect this form to GoHighLevel, or replace it with the GHL embed,
-   before publishing] — the panel is sized so a swap needs no layout work.
+  The form posts to FormSubmit, which relays submissions to
+  oscar@ocgfinancial.com. No account or API key is required, but the FIRST
+  submission triggers a one-time activation email to that address; click the
+  link in it once and every later submission arrives automatically.
+  Swap data-endpoint for the GoHighLevel embed at final handover; the panel
+  is sized so the change needs no layout work.
 -->
 <section class="sec" style="padding:150px 0 0;border-top:none;">
   <div class="container">
@@ -139,7 +141,10 @@
       <div class="contact-form-panel">
         <h2 style="font-size:25px;">Start the conversation</h2>
         <p style="font-size:16.5px;">Four quick fields. We reply personally, usually within one business day.</p>
-        <form id="contactForm" novalidate="">
+        <form id="contactForm" novalidate="" data-endpoint="https://formsubmit.co/ajax/oscar@ocgfinancial.com">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+          <input type="hidden" name="_subject" value="New enquiry from ocgfinancial.com">
+          <input type="hidden" name="_captcha" value="false">
           <div class="form-grid">
             <div class="form-field">
               <label for="cf-name">Your Name</label>
@@ -168,6 +173,7 @@
           <div style="margin-top:26px;">
             <button type="submit" class="btn btn-gold" style="width:100%;">Send Message</button>
           </div>
+          <p class="form-error" id="formError" role="alert">Something went wrong sending that. Please email <a href="mailto:oscar@ocgfinancial.com">oscar@ocgfinancial.com</a> or call <a href="tel:+12104163919">(210) 416-3919</a> and we will pick it up straight away.</p>
           <p class="form-note">Prefer to book straight in? <a href="https://api.leadconnectorhq.com/widget/bookings/book-a-readiness-assessment-ca" target="_blank" rel="noopener" style="color:var(--gold);">Schedule a consultation</a>. Your information is handled per our <a href="/privacy-policy" style="color:var(--gold);">privacy policy</a>.</p>
         </form>
         <div class="form-success" id="formSuccess" role="status">
@@ -191,14 +197,14 @@
           <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2z"/></svg></div>
           <div>
             <h3>Phone</h3>
-            <p><span class="field-pending">[Insert verified phone number]</span></p>
+            <p><a href="tel:+12104163919">(210) 416-3919</a></p>
           </div>
         </div>
         <div class="contact-way">
           <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg></div>
           <div>
             <h3>Email</h3>
-            <p><span class="field-pending">[Insert verified email address]</span></p>
+            <p><a href="mailto:oscar@ocgfinancial.com">oscar@ocgfinancial.com</a></p>
           </div>
         </div>
         <div class="contact-way">
@@ -338,7 +344,7 @@
   </div>
 </footer>
 
-<script src="/assets/js/main.js?v=85606d58" defer></script>
+<script src="/assets/js/main.js?v=665f87c6" defer></script>
 
 </body>
 </html>

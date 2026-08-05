@@ -134,15 +134,48 @@
     });
   }
 
-  /* Contact form: client-side handling until a CRM endpoint is wired up */
+  /* Contact form: posts to the relay in data-endpoint, which emails Oscar.
+     Falls back to showing phone/email if the request fails. */
   var form = document.getElementById('contactForm');
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      form.style.display = 'none';
-      var ok = document.getElementById('formSuccess');
-      if (ok) ok.classList.add('show');
+
+      var endpoint = form.getAttribute('data-endpoint');
+      var btn = form.querySelector('button[type="submit"]');
+      var errBox = document.getElementById('formError');
+      var okBox = document.getElementById('formSuccess');
+      var label = btn ? btn.textContent : '';
+
+      if (errBox) errBox.classList.remove('show');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+      var payload = {};
+      new FormData(form).forEach(function (v, k) { payload[k] = v; });
+
+      var restore = function () {
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+      };
+      var fail = function () {
+        restore();
+        if (errBox) errBox.classList.add('show');
+      };
+
+      if (!endpoint || typeof fetch !== 'function') { fail(); return; }
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        if (!res.ok) throw new Error(res.status);
+        return res.json().catch(function () { return {}; });
+      }).then(function () {
+        form.style.display = 'none';
+        if (errBox) errBox.classList.remove('show');
+        if (okBox) okBox.classList.add('show');
+      }).catch(fail);
     });
   }
 
