@@ -91,4 +91,32 @@ work).
 live. No change needed. If it is ever served from a different domain, those
 three places must be updated together.
 
-No build step is required to serve the site — it is plain HTML/CSS/JS.
+## Editing the site
+
+The pages in this repo are **generated**. Do not hand-edit the HTML at the
+root, in `services/`, `locations/`, or `resources/` — the next build will
+overwrite it. Edit the sources in `build/` instead:
+
+| Path | What it holds |
+| --- | --- |
+| `build/content/*.html` | The body copy of each page, one fragment per page |
+| `build/manifest.py` | Page list, titles, meta descriptions, schema |
+| `build/build.py` | Header, nav, footer, shared components, contact details |
+| `build/gen_locations.py` | Per-market copy for the eight location pages |
+| `build/qa.py` | Link, heading, metadata and asset checks |
+
+Regenerate and verify:
+
+```bash
+cd build
+python3 gen_locations.py   # only if you changed location copy
+python3 build.py           # writes the HTML, sitemap.xml, robots.txt
+python3 qa.py              # should print "All checks passed."
+```
+
+Python 3 with no third-party packages is the only requirement. Common edits:
+the phone number, email, and booking link are constants at the top of
+`build.py`; the client logo list and their destination URLs are in
+`CLIENT_LOGOS` in the same file.
+
+Serving the built site needs no build step — it is plain HTML, CSS, and JS.

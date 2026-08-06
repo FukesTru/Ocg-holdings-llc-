@@ -1,0 +1,307 @@
+<!--
+  PENDING CLIENT INPUT before launch:
+   - Founder photo + client logos are hotlinked from OCG's Wix CDN. Rehost locally.
+   - Verified phone, email, business address (see contact page).
+   - Three client logo destinations still need Oscar's confirmation before
+     they can be linked: Super Fiber, Better with Age, Kayode. Each name
+     matches several unrelated companies, so they render unlinked rather
+     than pointing at a guess.
+-->
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-copy reveal in">
+      <span class="eyebrow">Strategic Financial Partner</span>
+      <h1>Know Exactly Where Your Money Is <span class="grad-text">Going Next.</span></h1>
+      <p class="lead">Most firms tell you what already happened. OCG Financial builds the financial systems that show you what is coming: clean books, real cash flow visibility, and CFO-level strategy for owners who make decisions with actual numbers instead of instinct.</p>
+      <div class="hero-cta">
+        <a href="{{book}}" target="_blank" rel="noopener" class="btn btn-gold">Schedule a Consultation</a>
+        <a href="#services" class="btn btn-ghost">See How We Work</a>
+      </div>
+      <div class="hero-tags">
+        <span>Founder-Led</span><span class="sep">·</span><span>Operator Experience</span><span class="sep">·</span><span>Nationwide</span>
+      </div>
+    </div>
+
+    <div class="console-wrap reveal reveal-delay-2 in">
+      {{hero_stats}}
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span>Scroll</span><div class="line"></div></div>
+</section>
+
+<!-- ============ PROOF BAND ============ -->
+<section class="sec grad first" aria-label="Track record" style="padding:96px 0;">
+  <div class="container">
+    <div class="section-head centered reveal" style="margin-bottom:44px;">
+      <span class="eyebrow">The Standard We Work To</span>
+      <h2 style="font-size:clamp(28px,3.5vw,42px);">Numbers Our Clients Can Stand Behind</h2>
+    </div>
+    {{proof_home}}
+  </div>
+</section>
+
+<!-- ============ TRUST / CLIENT CAROUSEL ============ -->
+<section class="trust" id="trust">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Trusted by Brands That Are Building What's Next</h2>
+    </div>
+  </div>
+  <div class="marquee reveal" aria-label="Client logos">
+    <div class="marquee-track">{{logos}}</div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head centered reveal">
+      <span class="eyebrow">What We Do</span>
+      <h2>Four Services. One Financial System.</h2>
+      <p>Bookkeeping, CFO strategy, funding readiness, and tax preparation running off one clean set of numbers, instead of four providers who never speak to each other.</p>
+    </div>
+
+    <div class="service-grid">
+      <a class="service-card reveal" href="{{p}}services/bookkeeping.html">
+        <span class="idx">01 / Foundation</span>
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M8 4v16"/></svg></div>
+        <div class="tag">Bookkeeping</div>
+        <h3>Where the Business Has Been</h3>
+        <p>Clean, current, reconciled books closed on a schedule. Every decision you make after this depends on these numbers being right.</p>
+        <span class="go">Explore Bookkeeping →</span>
+        <div class="bar"></div>
+      </a>
+
+      <a class="service-card reveal reveal-delay-1" href="{{p}}services/fractional-cfo.html">
+        <span class="idx">02 / Strategy</span>
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3v18h18M7 15l4-5 3 3 5-7"/></svg></div>
+        <div class="tag">Fractional CFO Services</div>
+        <h3>Where It Is Going Next</h3>
+        <p>Forecasting, margin strategy, and cash flow planning at the level a full-time CFO would deliver, scoped to a business your size.</p>
+        <span class="go">Explore Fractional CFO →</span>
+        <div class="bar"></div>
+      </a>
+
+      <a class="service-card reveal reveal-delay-2" href="{{p}}services/business-funding.html">
+        <span class="idx">03 / Capital</span>
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="tag">Business Funding</div>
+        <h3>Ready Before You Ask</h3>
+        <p>Documentation, reporting, and financial preparation so capital conversations begin from a position of strength rather than a scramble.</p>
+        <span class="go">Explore Funding Readiness →</span>
+        <div class="bar"></div>
+      </a>
+
+      <a class="service-card reveal reveal-delay-3" href="{{p}}services/tax-preparation.html">
+        <span class="idx">04 / Compliance</span>
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 12l2 2 4-4M5 3h14v18l-7-4-7 4V3z"/></svg></div>
+        <div class="tag">Tax Preparation</div>
+        <h3>Filed on Clean Books</h3>
+        <p>Returns prepared from organized, reconciled records, so filing season is a checkpoint on work already done.</p>
+        <span class="go">Explore Tax Preparation →</span>
+        <div class="bar"></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How Engagements Work</span>
+      <h2>From Unclear Financials to Total Control</h2>
+      <p>A deliberate sequence, because forecasts built on unreliable books are just expensive guesses.</p>
+    </div>
+    <div class="process-list">
+      <div class="process-step reveal"><div class="num">01</div><h4>Diagnose</h4><p>We look at what is actually happening in the business, not only what the books say. Where the pressure is, where the margin is, and what the numbers are hiding.</p></div>
+      <div class="process-step reveal reveal-delay-1"><div class="num">02</div><h4>Build the Foundation</h4><p>Records get accurate, current, and organized. Historical cleanup is scoped up front so you know exactly what it involves before it starts.</p></div>
+      <div class="process-step reveal reveal-delay-2"><div class="num">03</div><h4>Create Visibility</h4><p>Reporting, forecasting, and cash flow clarity go live. Roughly 30 days in, you can see forward instead of only backward.</p></div>
+      <div class="process-step reveal reveal-delay-3"><div class="num">04</div><h4>Advise and Improve</h4><p>We stay in it with you, supporting the decisions that come as the business grows, changes, and takes on new challenges.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASH FLOW POSITIONING ============ -->
+<section class="philosophy" id="cash-flow">
+  <div class="orb" style="width:340px;height:340px;top:-80px;right:-100px;" aria-hidden="true"></div>
+  <div class="container">
+    <div class="phi-top reveal">
+      <span class="eyebrow">Cash Flow Is the Whole Game</span>
+      <h2>Profitable on Paper. Still Short on Cash.</h2>
+      <p>A profit and loss statement tells you the business earned money. It will not tell you whether you can cover payroll in six weeks. Growth consumes cash before it produces cash, and most owners discover that gap only once it has become urgent.</p>
+    </div>
+
+    <div class="phi-line reveal">
+      <svg viewBox="0 0 800 140" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="goldgrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#c9a13b"/>
+            <stop offset="50%" stop-color="#c9a13b"/>
+            <stop offset="100%" stop-color="#f0d078"/>
+          </linearGradient>
+        </defs>
+        <path class="path-bg" d="M0,100 C100,40 150,120 250,70 C350,20 400,110 500,60 C600,10 650,90 800,30"/>
+        <path class="path-gold" d="M0,100 C100,40 150,120 250,70 C350,20 400,110 500,60 C600,10 650,90 800,30"/>
+        <circle class="marker" cx="800" cy="30" r="4"/>
+      </svg>
+      <div class="caption-row"><span>Accounting Profit</span><span>Actual Liquidity</span></div>
+    </div>
+
+    <div class="phi-grid reveal">
+      <div class="phi-card bad">
+        <div class="lbl">Working Blind</div>
+        <h4>What Most Owners Are Dealing With</h4>
+        <ul>
+          <li>Hiring, inventory, and pricing decisions made on instinct because the books are weeks behind</li>
+          <li>Margin erosion that stays invisible until it is already expensive</li>
+          <li>Financials that do not hold up when a lender or investor starts asking questions</li>
+          <li>Deductions missed at tax time because the underlying records were never organized</li>
+        </ul>
+      </div>
+      <div class="phi-card good">
+        <div class="lbl">Financial Clarity</div>
+        <h4>What OCG Financial Builds Instead</h4>
+        <ul>
+          <li>Real visibility into where cash is actually going, updated every month</li>
+          <li>Forecasting that flags pressure while you still have options</li>
+          <li>Reporting structured the way lenders and investors expect to read it</li>
+          <li>A financial partner who has run businesses, not only reviewed them</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY OCG ============ -->
+<section class="sec" aria-label="Why OCG Financial">
+  <div class="container founder-grid">
+    <div class="founder-photo reveal">
+      <img src="{{founder_photo}}" alt="Oscar Cancino, Founder of OCG Financial" loading="lazy" referrerpolicy="no-referrer">
+      <div class="cap">Oscar Cancino · Founder, OCG Financial</div>
+    </div>
+    <div class="founder-copy reveal reveal-delay-1">
+      <span class="eyebrow">Why OCG Financial</span>
+      <blockquote class="quote">"I want owners to understand their numbers, not just hand them off and hope somebody else is paying attention."</blockquote>
+      <p>Oscar Cancino grew up around business and has spent his career inside it: starting companies, buying them, selling them, and learning from the ones that did not go to plan.</p>
+      <p><strong>OCG Financial is the firm he wishes he could have hired earlier.</strong> Not a service that files paperwork and disappears, but a partner that builds the financial infrastructure a growing business needs before the pressure arrives.</p>
+      <p>The premise is straightforward. Businesses become more valuable when they run on systems, process, accountability, and real financial visibility. Everything here is built toward that.</p>
+      <div class="founder-sig">
+        <div>
+          <div class="name">Oscar Cancino</div>
+          <div class="role">Founder, OCG Financial</div>
+        </div>
+        <a class="li-link" href="{{p}}about.html">Read the Full Story →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDUSTRIES ============ -->
+<section class="sec alt" id="industries" aria-label="Industries served">
+  <div class="container">
+    <div class="section-head centered reveal">
+      <span class="eyebrow">Who We Work With</span>
+      <h2>Built Around How Your Industry Moves Cash</h2>
+      <p>Every industry hides cash somewhere different: inventory, receivables, seasonality, project timing. The system adapts to yours.</p>
+    </div>
+    <div class="loc-chip-row reveal" style="justify-content:center;">
+      <a class="loc-chip" href="{{p}}industries.html#ecommerce">Ecommerce &amp; DTC</a>
+      <a class="loc-chip" href="{{p}}industries.html#cpg">Consumer Packaged Goods</a>
+      <a class="loc-chip" href="{{p}}industries.html#retail">Retail</a>
+      <a class="loc-chip" href="{{p}}industries.html#real-estate">Real Estate</a>
+      <a class="loc-chip" href="{{p}}industries.html#services">Professional Services</a>
+      <a class="loc-chip" href="{{p}}industries.html#hospitality">Hospitality &amp; Wellness</a>
+    </div>
+    <p class="reveal" style="text-align:center;margin-top:34px;"><a href="{{p}}industries.html" class="btn btn-ghost">See All Industries</a></p>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">In Their Words</span>
+      <h2>What Owners Say About Working With Us</h2>
+    </div>
+    <div class="t-grid">
+      <div class="t-card reveal">
+        <div class="quote-mark">"</div>
+        <p>Oscar &amp; OCG have provided great value as our partner in accounting. They have industry knowledge that has continually helped improve our internal strategies while helping us maintain timely, accurate books for our business. They've been ultra-responsive and mindful of deadlines as we've worked to clean up our bookkeeping and accounting practices.</p>
+        <div class="who"><strong>Aaron Hallerman</strong></div>
+      </div>
+      <div class="t-card reveal reveal-delay-1">
+        <div class="quote-mark">"</div>
+        <p>I absolutely love working with Oscar. After years of working with different bookkeepers and CPAs, I finally found someone who not only understands the numbers but also understands me, the person behind the business. He's responsive, trustworthy, and always looking for practical ways to keep things efficient and cost-effective.</p>
+        <div class="who"><strong>Vikki Krinsky</strong>, Founder, VK Energy Bar</div>
+      </div>
+      <div class="t-card stat-card reveal reveal-delay-2">
+        <div class="quote-mark">#</div>
+        <div class="lbl" style="font-size:11px;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-top:10px;">Across Our Client Base</div>
+        <div class="stat-row">
+          <div><div class="num"><span data-count-to="100" data-suffix="%">0%</span></div><div class="lbl">Investor-ready reporting</div></div>
+          <div><div class="num"><span data-count-to="64" data-suffix="%">0%</span></div><div class="lbl">Average gross margin</div></div>
+          <div><div class="num"><span data-count-to="30" data-suffix=" Days">0 Days</span></div><div class="lbl">To financial clarity</div></div>
+          <div><div class="num"><span data-count-to="14" data-suffix=" Days">0 Days</span></div><div class="lbl">Avg. DSO improvement</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:36px;"><a href="{{p}}client-results.html" style="color:var(--gold);border-bottom:1px solid rgba(201,161,59,.35);">See client results in more detail →</a></p>
+  </div>
+</section>
+
+<!-- ============ ENGAGEMENTS ============ -->
+<section class="sec grad" id="engagements" aria-label="Engagements">
+  <div class="container">
+    <div class="section-head centered reveal">
+      <span class="eyebrow">Engagements</span>
+      <h2>Scoped Around Your Business, Not a Package</h2>
+      <p>Every engagement begins with the same question: what does this business actually need to make better decisions? The answer shapes the scope.</p>
+    </div>
+    <div class="benefit-grid cols-2 reveal" style="max-width:1000px;margin:0 auto;">
+      <div class="benefit-card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></div>
+        <h3>It Starts With a Diagnostic</h3>
+        <p>Before anything is proposed, we look at your books, reporting, cash visibility, and margin structure. You get an honest read on where things stand and what the gaps are costing you.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></div>
+        <h3>Scope Is Agreed Up Front</h3>
+        <p>You know what is included, what it involves, and what it will cost before any work begins. Historical cleanup, if you need it, is quoted as a defined project rather than an open meter.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Clarity Inside 30 Days</h3>
+        <p>Most clients reach financial clarity within a month: books current, reporting live, and a forward view of cash rather than a rear-view summary of last quarter.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>It Grows With the Business</h3>
+        <p>Start with bookkeeping and add strategic support when the decisions justify it. The engagement adjusts as the business does, without rebuilding anything.</p>
+      </div>
+    </div>
+    <p class="reveal" style="text-align:center;margin-top:40px;">
+      <a href="{{book}}" target="_blank" rel="noopener" class="btn btn-gold">Schedule a Consultation</a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta" id="contact">
+  <div class="container">
+    <span class="eyebrow">Let's Talk</span>
+    <h2>Is Your Business Actually Ready <span class="grad-text">to Scale?</span></h2>
+    <p>Most businesses do not lack ambition. They lack financial infrastructure. If you are serious about profitability, capital readiness, and building something durable, start with a conversation.</p>
+    <div class="final-cta-btns">
+      <a href="{{book}}" target="_blank" rel="noopener" class="btn btn-gold">Schedule a Consultation</a>
+      <a href="{{p}}contact.html" class="btn btn-ghost">Contact OCG Financial</a>
+    </div>
+    <div class="final-contact">
+      <div><div class="lbl">Start With</div><div class="val"><a href="{{p}}services/bookkeeping.html">Bookkeeping</a> or <a href="{{p}}services/fractional-cfo.html">Fractional CFO</a></div></div>
+      <div><div class="lbl">Learn First</div><div class="val"><a href="{{p}}resources.html">Watch the Videos →</a></div></div>
+    </div>
+  </div>
+</section>
