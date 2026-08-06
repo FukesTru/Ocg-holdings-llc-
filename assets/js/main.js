@@ -134,6 +134,32 @@
     });
   }
 
+  /* Featured video: the Wistia player is only fetched once someone clicks,
+     so the page carries a poster image rather than a third-party player. */
+  document.querySelectorAll('.vf-player[data-wistia]').forEach(function (wrap) {
+    var poster = wrap.querySelector('.vf-poster');
+    if (!poster) return;
+    /* If the poster image ever stops resolving, fall back to the panel
+       gradient rather than a broken-image icon. */
+    var thumb = poster.querySelector('img');
+    if (thumb) {
+      thumb.addEventListener('error', function () { thumb.style.display = 'none'; });
+    }
+    poster.addEventListener('click', function () {
+      var frame = document.createElement('iframe');
+      frame.className = 'vf-frame';
+      frame.src = 'https://fast.wistia.net/embed/iframe/' +
+        encodeURIComponent(wrap.getAttribute('data-wistia')) +
+        '?autoPlay=true&playerColor=d9b355';
+      frame.title = poster.getAttribute('data-title') || 'Video';
+      frame.setAttribute('allow', 'autoplay; fullscreen');
+      frame.setAttribute('allowfullscreen', '');
+      frame.setAttribute('frameborder', '0');
+      wrap.appendChild(frame);
+      poster.remove();
+    });
+  });
+
   /* Every form with a data-endpoint posts to the relay that emails Oscar.
      Falls back to showing phone/email if the request fails. */
   document.querySelectorAll('form[data-endpoint]').forEach(function (form) {
