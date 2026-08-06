@@ -197,18 +197,44 @@ header.scrolled .brand-logo{height:40px;width:137px;}
 .btn-gold{
   background:linear-gradient(135deg,var(--gold-bright),var(--gold));
   color:#0a0a0a;
-  box-shadow:0 0 0 0 rgba(201,161,59,0.5);
   position:relative;overflow:hidden;
+  /* Soft gold halo at rest, warmer and wider on hover. Kept low-alpha so it
+     reads as light coming off the button rather than a drop shadow. */
+  box-shadow:
+    0 4px 16px -6px rgba(217,179,85,0.45),
+    0 0 0 1px rgba(240,208,120,0.16) inset;
 }
 .btn-gold::after{content:"";position:absolute;top:0;left:-60%;width:35%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,0.4),transparent);transition:left .6s var(--ease);}
 .btn-gold:hover::after{left:130%;}
-.btn-gold:hover{box-shadow:0 8px 34px -6px rgba(201,161,59,0.6);transform:translateY(-1px);}
+.btn-gold:hover{
+  box-shadow:
+    0 10px 38px -8px rgba(217,179,85,0.72),
+    0 0 26px -6px rgba(240,208,120,0.40),
+    0 0 0 1px rgba(240,208,120,0.30) inset;
+  transform:translateY(-1px);
+}
+.btn-gold:active{transform:translateY(0);box-shadow:0 3px 14px -6px rgba(217,179,85,0.55);}
+.btn-gold:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px;}
+
+/* The persistent header CTA breathes very slowly so it stays noticeable
+   without pulling focus. Motion is dropped for reduced-motion users. */
+.nav-cta{animation:ctaGlow 6.5s ease-in-out infinite;}
+@keyframes ctaGlow{
+  0%,100%{box-shadow:0 4px 16px -6px rgba(217,179,85,0.42), 0 0 0 1px rgba(240,208,120,0.16) inset;}
+  50%{box-shadow:0 6px 26px -6px rgba(217,179,85,0.62), 0 0 16px -6px rgba(240,208,120,0.30), 0 0 0 1px rgba(240,208,120,0.24) inset;}
+}
+.nav-cta:hover{animation:none;}
 .btn-ghost{
   border:1px solid var(--hairline-strong);
   color:var(--text);
   background:rgba(255,255,255,0.02);
 }
-.btn-ghost:hover{border-color:var(--gold);background:rgba(212,175,55,0.07);}
+.btn-ghost:hover{
+  border-color:var(--gold);
+  background:rgba(217,179,85,0.07);
+  box-shadow:0 0 20px -8px rgba(217,179,85,0.45);
+}
+.btn-ghost:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
 .nav-cta{display:none;}
 @media(min-width:1120px){.nav-cta{display:inline-flex;padding:13px 26px;font-size:14px;}}
 .burger{display:flex;flex-direction:column;gap:5px;width:26px;flex-shrink:0;}
@@ -924,6 +950,7 @@ footer{background:#040404;border-top:1px solid var(--hairline);padding:80px 0 30
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
   .reveal{opacity:1;transform:none;}
+  .nav-cta{animation:none;}
   .sec-divider{transform:scaleX(1);}
 }
 
