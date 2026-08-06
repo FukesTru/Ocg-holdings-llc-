@@ -32,14 +32,20 @@ Local preview that mirrors Vercel's clean-URL behavior: `npx serve .`
 
 | Path | Purpose |
 | --- | --- |
-| `index.html` | Homepage (approved design, expanded with industries/FAQ/insights previews) |
-| `about.html`, `contact.html`, `faqs.html`, `industries.html`, `case-studies.html`, `resources.html` | Core pages |
+| `index.html` | Homepage |
+| `about.html`, `contact.html`, `faqs.html`, `industries.html`, `client-results.html`, `resources.html` | Core pages |
 | `privacy-policy.html`, `terms-of-service.html` | Legal |
-| `services/*.html` | Six dedicated service pages (CFO, bookkeeping, tax, funding, strategy, fractional CFO) |
-| `locations/index.html` | Service-locations hub (nationwide) |
-| `locations/*.html` | 14 city SEO landing pages — national: New York, Los Angeles, Chicago, Dallas, Houston, Atlanta, Austin, Denver; Florida: Miami, Orlando, Tampa, Jacksonville, Fort Lauderdale, West Palm Beach |
-| `resources/*.html` | Insight articles |
+| `services/*.html` | Four service pages: bookkeeping, fractional CFO, business funding, tax preparation |
+| `locations/index.html` | Markets hub |
+| `locations/*.html` | Eight market pages: New York City, San Francisco, Boston, Chicago, Dallas, Miami, Los Angeles, Washington DC |
+| `resources/*.html` | Long-form guides |
+| `build/` | Sources the pages are generated from (see "Editing the site") |
+| `scripts/fetch-images.sh` | Pulls images off the Wix CDN and hosts them locally |
+| `vercel.json` | Clean URLs, caching, security headers, and 301s for retired URLs |
 | `sitemap.xml`, `robots.txt` | SEO plumbing (canonical base: `https://www.ocgfinancial.com/`) |
+
+Retired URLs (the old six-service and fourteen-city structure, `/videos`,
+`/case-studies`) 301-redirect to their replacements via `vercel.json`.
 
 ## Brand logo
 
