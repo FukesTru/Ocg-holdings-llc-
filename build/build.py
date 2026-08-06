@@ -140,7 +140,7 @@ def _proof(num, label, count=None, suffix="", prefix=""):
 PROOF_HOME = ('<div class="proof-band reveal">\n  <div class="proof-grid">\n'
               + "\n".join([
                   _proof(None, "Investor-Ready Reporting", count="100", suffix="%"),
-                  _proof(None, "Average Client Gross Margin", count="64", suffix="%"),
+                  _proof(None, "Client Monthly Recurring Revenue", count="84", prefix="$", suffix="M"),
                   _proof(None, "Average Time to Financial Clarity", count="30", suffix=" Days"),
                   _proof(None, "Average DSO Improvement", count="14", suffix=" Days"),
               ])
@@ -174,9 +174,9 @@ HERO_STATS = """<div class="hero-stats">
       <div class="hs-lbl">Investor-Ready Reporting</div>
     </div>
     <div class="hs-item">
-      <span class="hs-num"><span data-count-to="64" data-suffix="%">0%</span></span>
+      <span class="hs-num"><span data-count-to="84" data-prefix="$" data-suffix="M">$0M</span></span>
       <div class="hs-rule"></div>
-      <div class="hs-lbl">Average Gross Margin</div>
+      <div class="hs-lbl">Client Monthly Recurring Revenue</div>
     </div>
     <div class="hs-item">
       <span class="hs-num"><span data-count-to="30" data-suffix=" Days">0 Days</span></span>
