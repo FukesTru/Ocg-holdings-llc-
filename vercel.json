@@ -94,6 +94,11 @@
       "source": "/case-studies",
       "destination": "/client-results",
       "permanent": true
+    },
+    {
+      "source": "/videos",
+      "destination": "/resources",
+      "permanent": true
     }
   ]
 }

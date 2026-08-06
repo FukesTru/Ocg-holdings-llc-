@@ -58,11 +58,37 @@ block in the header and footer of each page with:
 
 ## Notes before launch
 
-- The logo is a vector re-creation of the supplied artwork — swap in the
+**Images are still hosted on Oscar's Wix CDN.** The founder photo and the
+nine client logos load from `static.wixstatic.com`. When the old Wix site is
+taken down those URLs stop working and the images disappear. Fix it with one
+command, from any machine with normal internet access:
+
+```bash
+bash scripts/fetch-images.sh
+```
+
+That downloads all ten images into `assets/img/`, repoints every page at the
+local copies, and verifies nothing still references the CDN. Commit the
+result. The script is safe to re-run and makes no changes unless every
+download succeeded.
+
+**Contact form.** `contact.html` posts to FormSubmit, which relays messages
+to oscar@ocgfinancial.com. No account or API key is needed, but the *first*
+submission triggers a one-time activation email to that address — click the
+link in it once and every later submission arrives automatically. To swap in
+a GoHighLevel embed at final handover, replace the `data-endpoint` attribute
+on the form (or the whole panel; it is sized so the change needs no layout
+work).
+
+**Still to come.**
+
+- Video embeds for the three reserved slots near the top of `/resources`.
+- The logo is a vector re-creation of the supplied artwork; swap in the
   original file (see above) if exact reproduction matters.
-- Founder photo and client logos are hotlinked from OCG's Wix CDN — rehost locally.
-- The contact form is handled client-side only; wire its submit to the CRM/booking backend.
-- Video cards on the homepage are marked "Coming Soon" pending approved embeds.
-- Update the canonical domain in every page's `<head>`, `sitemap.xml`, and `robots.txt` if the site is served from a different domain.
+
+**Domain.** Canonical URLs, `sitemap.xml`, and structured data all point at
+`https://www.ocgfinancial.com/`, which is where this site is intended to
+live. No change needed. If it is ever served from a different domain, those
+three places must be updated together.
 
 No build step is required to serve the site — it is plain HTML/CSS/JS.
