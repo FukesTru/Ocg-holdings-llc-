@@ -160,48 +160,6 @@
     });
   });
 
-  /* Every form with a data-endpoint posts to the relay that emails Oscar.
-     Falls back to showing phone/email if the request fails. */
-  document.querySelectorAll('form[data-endpoint]').forEach(function (form) {
-    var panel = form.closest('.contact-form-panel') || form.parentNode;
-    var okBox = panel.querySelector('.form-success');
-    var errBox = panel.querySelector('.form-error');
-    var btn = form.querySelector('button[type="submit"]');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-
-      var endpoint = form.getAttribute('data-endpoint');
-      var label = btn ? btn.textContent : '';
-      if (errBox) errBox.classList.remove('show');
-      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
-
-      var payload = {};
-      new FormData(form).forEach(function (v, k) { payload[k] = v; });
-
-      var fail = function () {
-        if (btn) { btn.disabled = false; btn.textContent = label; }
-        if (errBox) errBox.classList.add('show');
-      };
-
-      if (!endpoint || typeof fetch !== 'function') { fail(); return; }
-
-      fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
-      }).then(function (res) {
-        if (!res.ok) throw new Error(res.status);
-        return res.json().catch(function () { return {}; });
-      }).then(function () {
-        form.style.display = 'none';
-        if (errBox) errBox.classList.remove('show');
-        if (okBox) okBox.classList.add('show');
-      }).catch(fail);
-    });
-  });
-
   /* Footer year */
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();

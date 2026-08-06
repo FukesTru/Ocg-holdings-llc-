@@ -78,13 +78,20 @@ local copies, and verifies nothing still references the CDN. Commit the
 result. The script is safe to re-run and makes no changes unless every
 download succeeded.
 
-**Contact form.** `contact.html` posts to FormSubmit, which relays messages
-to oscar@ocgfinancial.com. No account or API key is needed, but the *first*
-submission triggers a one-time activation email to that address — click the
-link in it once and every later submission arrives automatically. To swap in
-a GoHighLevel embed at final handover, replace the `data-endpoint` attribute
-on the form (or the whole panel; it is sized so the change needs no layout
-work).
+**Contact form and chat.** Both are live GoHighLevel embeds, so submissions
+land in the GHL account rather than anywhere in this repo.
+
+- The form ("Website Form (Ocg financial)") appears on `contact.html` and on
+  all eight market pages. Its markup comes from `ghl_form()` in
+  `build.py`, and `form_embed.js` is included only on the pages that render
+  it. To point at a different form, change `GHL_FORM_ID` at the top of
+  `build.py` and rebuild.
+- The chat widget loads on every page from the footer; its ID is
+  `CHAT_WIDGET_ID` in `build.py`.
+
+The form's own colors, fields, and copy are controlled in GoHighLevel's form
+builder, not here. If it renders light against the dark page, set the form
+background to transparent (or dark) in GHL.
 
 **Still to come.**
 

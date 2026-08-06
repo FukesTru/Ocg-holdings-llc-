@@ -873,6 +873,11 @@ a.logo-slot{cursor:pointer;}
 }
 .contact-form-panel h2{font-size:26px;margin-bottom:8px;}
 .contact-form-panel > p{color:var(--text-dim);font-size:15px;margin-bottom:30px;}
+/* Panel holding a third-party form iframe: tighter padding, since the
+   embed brings its own internal spacing. */
+.contact-form-panel.has-embed{padding:34px 28px 28px;}
+@media(max-width:560px){.contact-form-panel.has-embed{padding:26px 16px 18px;}}
+.ghl-form{display:block;width:100%;max-width:100%;min-height:542px;background:transparent;}
 .form-grid{display:grid;grid-template-columns:1fr;gap:20px;}
 @media(min-width:640px){.form-grid{grid-template-columns:1fr 1fr;}
   .form-grid .full{grid-column:1/3;}}

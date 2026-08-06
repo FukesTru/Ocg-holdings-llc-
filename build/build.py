@@ -16,6 +16,15 @@ CONTENT = os.path.join(HERE, "content")
 BASE = "https://www.ocgfinancial.com/"
 BOOK = "https://api.leadconnectorhq.com/widget/bookings/book-a-readiness-assessment-ca"
 
+# GoHighLevel embeds. The form is "Website Form (Ocg financial)"; its
+# companion form_embed.js is loaded only on pages that actually render the
+# iframe. The chat widget loads on every page.
+GHL_FORM_ID = "e657dYZaPQCYeCeeZpp2"
+GHL_FORM_HEIGHT = "542"
+GHL_FORM_NAME = "Website Form (Ocg financial)"
+CHAT_WIDGET_ID = "6a73733a57d382a077db770f"
+GHL_FORM_SCRIPT = '<script src="https://link.msgsndr.com/js/form_embed.js"></script>'
+
 # Verified business contact details. OCG Financial has no public street
 # address, so none is published and none appears in structured data.
 PHONE_DISPLAY = "(210) 416-3919"
@@ -258,45 +267,35 @@ FUNDING_PATH = """<div class="fund-path reveal">
 
 
 
-def short_form(city):
-    """Compact working enquiry form for the market pages. Posts to the same
-    relay as the contact page; swap data-endpoint for the GHL embed later."""
-    return ('<div class="contact-form-panel reveal reveal-delay-1">\n'
-            '  <h2 style="font-size:23px;">Talk to us about your %s business</h2>\n'
-            '  <p style="font-size:16px;">Two fields and a sentence. We reply personally, usually within one business day.</p>\n'
-            '  <form class="enquiry-form" novalidate="" data-endpoint="https://formsubmit.co/ajax/%s">\n'
-            '    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">\n'
-            '    <input type="hidden" name="_subject" value="New enquiry from the %s page">\n'
-            '    <input type="hidden" name="_captcha" value="false">\n'
-            '    <input type="hidden" name="market" value="%s">\n'
-            '    <div class="form-grid">\n'
-            '      <div class="form-field full">\n'
-            '        <label for="lf-name-%s">Your Name</label>\n'
-            '        <input type="text" id="lf-name-%s" name="name" placeholder="Jane Founder" required autocomplete="name">\n'
-            '      </div>\n'
-            '      <div class="form-field full">\n'
-            '        <label for="lf-email-%s">Email</label>\n'
-            '        <input type="email" id="lf-email-%s" name="email" placeholder="you@company.com" required autocomplete="email">\n'
-            '      </div>\n'
-            '      <div class="form-field full">\n'
-            '        <label for="lf-msg-%s">What Do You Need Help With?</label>\n'
-            '        <textarea id="lf-msg-%s" name="message" placeholder="Where are the numbers letting you down right now?" required style="min-height:104px;"></textarea>\n'
-            '      </div>\n'
-            '    </div>\n'
-            '    <div style="margin-top:22px;">\n'
-            '      <button type="submit" class="btn btn-gold" style="width:100%%;">Send Message</button>\n'
-            '    </div>\n'
-            '    <p class="form-error" role="alert">Something went wrong sending that. Please email '
-            '<a href="mailto:%s">%s</a> or call <a href="tel:%s">%s</a> and we will pick it up straight away.</p>\n'
-            '  </form>\n'
-            '  <div class="form-success" role="status">\n'
-            '    <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>\n'
-            '    <h3>Message received.</h3>\n'
-            '    <p>Thanks. We will be in touch shortly.</p>\n'
-            '  </div>\n'
-            '</div>' % (city, EMAIL, city, city, slugify(city), slugify(city), slugify(city),
-                        slugify(city), slugify(city), slugify(city),
-                        EMAIL, EMAIL, PHONE_TEL, PHONE_DISPLAY))
+def ghl_form(heading, blurb, extra_class="", heading_size="23px"):
+    """The live GoHighLevel intake form, wrapped in the site's panel so it
+    keeps the surrounding spacing. form_embed.js resizes the iframe to fit
+    its content; the inline height is the starting value GHL supplies, so
+    the form is still usable if that script fails to load."""
+    cls = ("contact-form-panel has-embed " + extra_class).strip()
+    return ('<div class="%s">\n'
+            '  <h2 style="font-size:%s;">%s</h2>\n'
+            '  <p style="font-size:16px;">%s</p>\n'
+            '  <iframe class="ghl-form"\n'
+            '    src="https://api.leadconnectorhq.com/widget/form/%s"\n'
+            '    style="width:100%%;height:%spx;border:none;border-radius:10px"\n'
+            '    id="inline-%s"\n'
+            '    data-layout="{\'id\':\'INLINE\'}"\n'
+            '    data-trigger-type="alwaysShow"\n'
+            '    data-trigger-value=""\n'
+            '    data-activation-type="alwaysActivated"\n'
+            '    data-activation-value=""\n'
+            '    data-deactivation-type="neverDeactivate"\n'
+            '    data-deactivation-value=""\n'
+            '    data-form-name="%s"\n'
+            '    data-height="%s"\n'
+            '    data-layout-iframe-id="inline-%s"\n'
+            '    data-form-id="%s"\n'
+            '    title="%s"></iframe>\n'
+            '</div>' % (cls, heading_size, heading, blurb,
+                        GHL_FORM_ID, GHL_FORM_HEIGHT, GHL_FORM_ID,
+                        GHL_FORM_NAME, GHL_FORM_HEIGHT, GHL_FORM_ID,
+                        GHL_FORM_ID, GHL_FORM_NAME))
 
 
 def slugify(v):
@@ -512,8 +511,9 @@ def breadcrumb_schema(meta):
     return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items}
 
 
-def footer(meta):
+def footer(meta, has_form=False):
     p = meta["prefix"]
+    form_script = GHL_FORM_SCRIPT if has_form else ""
     svc = "\n".join(f'          <li><a href="{p}services/{slug}.html">{name}</a></li>' for slug, name, _ in SERVICES)
     loc = "\n".join(f'          <li><a href="{p}locations/{slug}.html">{name}</a></li>' for slug, name, _ in LOCATIONS)
     loc += f'\n          <li><a href="{p}locations/index.html" style="color:var(--gold);">All Locations →</a></li>' 
@@ -577,6 +577,9 @@ def footer(meta):
 </footer>
 
 <script src="{p}assets/js/main.js?v={JS_V}" defer></script>
+{form_script}
+<!-- GoHighLevel chat widget -->
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="{CHAT_WIDGET_ID}"></script>
 
 </body>
 </html>
@@ -628,13 +631,16 @@ def build_page(meta):
     body = body.replace("{{funding_path}}", FUNDING_PATH)
     body = body.replace("{{proof_home}}", PROOF_HOME)
     body = body.replace("{{proof_cfo}}", PROOF_CFO)
-    body = body.replace("{{ghl_form}}", ghl_slot(
-        "form", "Contact form goes here",
-        "This panel is reserved for the OCG Financial intake form. Drop the embed in and it inherits "
-        "the surrounding spacing and styling with no layout changes.", tall=True))
+    body = body.replace("{{ghl_form}}", ghl_form(
+        "Start the conversation",
+        "Tell us where the business stands. We reply personally, usually within one business day.",
+        heading_size="25px"))
     if "{{ghl_form_short}}" in body:
         city = meta.get("crumbs", [("", None), ("Your", None)])[-1][0].split(",")[0]
-        body = body.replace("{{ghl_form_short}}", short_form(city))
+        body = body.replace("{{ghl_form_short}}", ghl_form(
+            "Talk to us about your %s business" % city,
+            "We reply personally, usually within one business day.",
+            extra_class="reveal reveal-delay-1"))
     body = body.replace("{{ghl_calendar}}", ghl_slot(
         "calendar", "Booking calendar goes here",
         "Reserved for the live scheduling calendar. Until it is embedded, the consultation buttons on "
@@ -647,7 +653,8 @@ def build_page(meta):
     schema.extend(meta.get("schema", []))
     meta = dict(meta, schema=schema)
 
-    html = head(meta) + nav(meta) + "\n<main>\n" + body + "\n</main>\n\n" + footer(meta)
+    has_form = 'id="inline-%s"' % GHL_FORM_ID in body
+    html = head(meta) + nav(meta) + "\n<main>\n" + body + "\n</main>\n\n" + footer(meta, has_form)
     html = clean_links(html)
     out = os.path.join(ROOT, meta["out"])
     os.makedirs(os.path.dirname(out), exist_ok=True)
