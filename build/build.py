@@ -162,23 +162,6 @@ PROOF_CFO = ('<div class="proof-band compact reveal">\n  <div class="proof-grid"
              ])
              + '\n  </div>\n</div>')
 
-# Bookkeeping page band.
-PROOF_BOOKS = ('<div class="proof-band compact reveal">\n  <div class="proof-grid" style="grid-template-columns:1fr;">\n'
-               + "\n".join([
-                   _proof(None, "Investor-Ready Reporting", count="100", suffix="%"),
-                   _proof(None, "Average Client Gross Margin", count="64", suffix="%"),
-                   _proof(None, "Average DSO Improvement", count="14", suffix=" Days"),
-               ])
-               + '\n  </div>\n</div>')
-
-# Funding page band.
-PROOF_FUND = ('<div class="proof-band compact reveal">\n  <div class="proof-grid" style="grid-template-columns:1fr;">\n'
-              + "\n".join([
-                  _proof(None, "Investor-Ready Reporting", count="100", suffix="%"),
-                  _proof(None, "Average Time to Financial Clarity", count="30", suffix=" Days"),
-              ])
-              + '\n  </div>\n</div>')
-
 
 
 # Hero stat panel: the four headline proof points, presented plainly.
@@ -645,8 +628,6 @@ def build_page(meta):
     body = body.replace("{{funding_path}}", FUNDING_PATH)
     body = body.replace("{{proof_home}}", PROOF_HOME)
     body = body.replace("{{proof_cfo}}", PROOF_CFO)
-    body = body.replace("{{proof_books}}", PROOF_BOOKS)
-    body = body.replace("{{proof_fund}}", PROOF_FUND)
     body = body.replace("{{ghl_form}}", ghl_slot(
         "form", "Contact form goes here",
         "This panel is reserved for the OCG Financial intake form. Drop the embed in and it inherits "
