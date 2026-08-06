@@ -20,6 +20,9 @@ ALL = [
     ("washington-dc", "Washington", "DC"),
 ]
 
+# Note: p1 is deliberately not rendered. It restated the hero lead almost
+# point for point on every page, so the intro now opens on p2. The copy is
+# kept here in case it is ever wanted back.
 CITIES = {
     "new-york": dict(
         eyebrow="New York City, NY",
@@ -259,15 +262,14 @@ def render(slug, c):
   <div class="orb" style="width:320px;height:320px;top:40px;right:-90px;" aria-hidden="true"></div>
   <div class="container">
     {{crumbs}}
-    <span class="eyebrow">%(label)s</span>
     <h1>%(h1)s</h1>
     <p class="lead">%(lead)s</p>
     <div class="hero-cta">
       <a href="{{book}}" target="_blank" rel="noopener" class="btn btn-gold">Schedule a Consultation</a>
-      <a href="#services" class="btn btn-ghost">Services for %(city)s Businesses</a>
+      <a href="#services" class="btn btn-ghost">See the Services</a>
     </div>
     <div class="hero-tags">
-      <span>Founder-Led</span><span class="sep">·</span><span>Remote-First</span><span class="sep">·</span><span>Serving %(label)s</span>
+      <span>Founder-Led</span><span class="sep">·</span><span>Remote-First</span>
     </div>
   </div>
 </section>
@@ -276,10 +278,9 @@ def render(slug, c):
   <div class="container">
     <div class="section-head centered reveal">
       <span class="eyebrow">The Local Picture</span>
-      <h2>Financial Clarity for %(city)s Business Owners</h2>
+      <h2>What We See in the %(city)s Market</h2>
     </div>
     <div class="loc-intro reveal">
-      <p>%(p1)s</p>
       <p>%(p2)s</p>
       <p>%(p3)s</p>
     </div>
@@ -303,7 +304,7 @@ def render(slug, c):
   <div class="container">
     <div class="section-head centered reveal">
       <span class="eyebrow">What Changes</span>
-      <h2>Built for Owners Carrying Real Overhead</h2>
+      <h2>Where Owners Feel the Difference</h2>
       <p>If the business generates serious revenue but the financial side feels like guesswork, this is the gap we close.</p>
     </div>
     <div class="benefit-grid cols-2 reveal" style="max-width:1000px;margin:0 auto;">
@@ -347,7 +348,7 @@ def render(slug, c):
 <section class="sec" aria-label="Questions">
   <div class="container">
     <div class="section-head centered reveal">
-      <span class="eyebrow">%(city)s Questions</span>
+      <span class="eyebrow">Questions</span>
       <h2>Working With OCG Financial in %(city)s</h2>
     </div>
     <div class="faq-list reveal" style="margin:0 auto;">
