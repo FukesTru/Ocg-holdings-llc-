@@ -16,6 +16,17 @@ CONTENT = os.path.join(HERE, "content")
 BASE = "https://www.ocgfinancial.com/"
 BOOK = "https://api.leadconnectorhq.com/widget/bookings/book-a-readiness-assessment-ca"
 
+# The Resources nav tab points at the campaign landing page rather than a
+# page on this site. URL supplied by the client, used verbatim including
+# its campaign parameters. Ampersands are escaped for valid HTML.
+LANDING = ("https://ocgfinancial.co/home"
+           "?utm_medium=paid&utm_source=ig"
+           "&utm_id=120251697387740131"
+           "&utm_content=120251697387760131"
+           "&utm_term=120251697387750131"
+           "&utm_campaign=120251697387740131")
+LANDING_HREF = LANDING.replace("&", "&amp;")
+
 # Verified business contact details. OCG Financial has no public street
 # address, so none is published and none appears in structured data.
 PHONE_DISPLAY = "(210) 416-3919"
@@ -452,7 +463,7 @@ def nav(meta):
         </div>
       </li>
       <li><a href="{p}industries.html"{curattr('industries')}>Industries</a></li>
-      <li><a href="{p}resources.html"{curattr('resources')}>Resources</a></li>
+      <li><a href="{LANDING_HREF}" target="_blank" rel="noopener">Resources</a></li>
       <li><a href="{p}contact.html"{curattr('contact')}>Contact</a></li>
     </ul>
     <a href="{BOOK}" target="_blank" rel="noopener" class="btn btn-gold nav-cta">Schedule a Consultation</a>
@@ -476,7 +487,7 @@ def nav(meta):
     </div>
   </div>
   <a href="{p}industries.html">Industries</a>
-  <a href="{p}resources.html">Resources</a>
+  <a href="{LANDING_HREF}" target="_blank" rel="noopener">Resources</a>
   <a href="{p}contact.html">Contact</a>
   <a href="{BOOK}" target="_blank" rel="noopener" class="btn btn-gold">Schedule a Consultation</a>
 </div>
