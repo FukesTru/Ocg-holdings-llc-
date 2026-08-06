@@ -134,31 +134,28 @@
     });
   }
 
-  /* Contact form: posts to the relay in data-endpoint, which emails Oscar.
+  /* Every form with a data-endpoint posts to the relay that emails Oscar.
      Falls back to showing phone/email if the request fails. */
-  var form = document.getElementById('contactForm');
-  if (form) {
+  document.querySelectorAll('form[data-endpoint]').forEach(function (form) {
+    var panel = form.closest('.contact-form-panel') || form.parentNode;
+    var okBox = panel.querySelector('.form-success');
+    var errBox = panel.querySelector('.form-error');
+    var btn = form.querySelector('button[type="submit"]');
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
 
       var endpoint = form.getAttribute('data-endpoint');
-      var btn = form.querySelector('button[type="submit"]');
-      var errBox = document.getElementById('formError');
-      var okBox = document.getElementById('formSuccess');
       var label = btn ? btn.textContent : '';
-
       if (errBox) errBox.classList.remove('show');
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
       var payload = {};
       new FormData(form).forEach(function (v, k) { payload[k] = v; });
 
-      var restore = function () {
-        if (btn) { btn.disabled = false; btn.textContent = label; }
-      };
       var fail = function () {
-        restore();
+        if (btn) { btn.disabled = false; btn.textContent = label; }
         if (errBox) errBox.classList.add('show');
       };
 
@@ -177,7 +174,7 @@
         if (okBox) okBox.classList.add('show');
       }).catch(fail);
     });
-  }
+  });
 
   /* Footer year */
   var year = document.getElementById('year');

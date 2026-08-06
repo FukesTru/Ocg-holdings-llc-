@@ -283,12 +283,38 @@
           <a href="/contact" class="btn btn-ghost">Contact Us</a>
         </div>
       </div>
-      <div class="embed-slot reveal">
-  <span class="es-tag">GoHighLevel Form</span>
-  <span class="es-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 10h8M8 14h5"/></svg></span>
-  <h3>Request a callback</h3>
-  <p>Reserved for a short GoHighLevel intake form on this page.</p>
-  <code>[Insert approved GoHighLevel form embed here]</code>
+      <div class="contact-form-panel reveal reveal-delay-1">
+  <h2 style="font-size:23px;">Talk to us about your Chicago business</h2>
+  <p style="font-size:16px;">Two fields and a sentence. We reply personally, usually within one business day.</p>
+  <form class="enquiry-form" novalidate="" data-endpoint="https://formsubmit.co/ajax/oscar@ocgfinancial.com">
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+    <input type="hidden" name="_subject" value="New enquiry from the Chicago page">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="market" value="Chicago">
+    <div class="form-grid">
+      <div class="form-field full">
+        <label for="lf-name-chicago">Your Name</label>
+        <input type="text" id="lf-name-chicago" name="name" placeholder="Jane Founder" required autocomplete="name">
+      </div>
+      <div class="form-field full">
+        <label for="lf-email-chicago">Email</label>
+        <input type="email" id="lf-email-chicago" name="email" placeholder="you@company.com" required autocomplete="email">
+      </div>
+      <div class="form-field full">
+        <label for="lf-msg-chicago">What Do You Need Help With?</label>
+        <textarea id="lf-msg-chicago" name="message" placeholder="Where are the numbers letting you down right now?" required style="min-height:104px;"></textarea>
+      </div>
+    </div>
+    <div style="margin-top:22px;">
+      <button type="submit" class="btn btn-gold" style="width:100%;">Send Message</button>
+    </div>
+    <p class="form-error" role="alert">Something went wrong sending that. Please email <a href="mailto:oscar@ocgfinancial.com">oscar@ocgfinancial.com</a> or call <a href="tel:+12104163919">(210) 416-3919</a> and we will pick it up straight away.</p>
+  </form>
+  <div class="form-success" role="status">
+    <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>
+    <h3>Message received.</h3>
+    <p>Thanks. We will be in touch shortly.</p>
+  </div>
 </div>
     </div>
     <div class="reveal" style="margin-top:70px;text-align:center;">
@@ -396,7 +422,7 @@
   </div>
 </footer>
 
-<script src="/assets/js/main.js?v=665f87c6" defer></script>
+<script src="/assets/js/main.js?v=b8510ffd" defer></script>
 
 </body>
 </html>
