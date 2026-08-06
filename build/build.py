@@ -141,7 +141,7 @@ PROOF_HOME = ('<div class="proof-band reveal">\n  <div class="proof-grid">\n'
               + "\n".join([
                   _proof(None, "Investor-Ready Reporting", count="100", suffix="%"),
                   _proof(None, "Client Monthly Recurring Revenue", count="84", prefix="$", suffix="M"),
-                  _proof(None, "Average Time to Financial Clarity", count="30", suffix=" Days"),
+                  _proof(None, "In Capital Raised", count="35", prefix="$", suffix="M+"),
                   _proof(None, "Average DSO Improvement", count="14", suffix=" Days"),
               ])
               + '\n  </div>\n'
@@ -156,7 +156,7 @@ PROOF_HOME = ('<div class="proof-band reveal">\n  <div class="proof-grid">\n'
 PROOF_CFO = ('<div class="proof-band compact reveal">\n  <div class="proof-grid">\n'
              + "\n".join([
                  _proof("$0", "Full-Time CFO Overhead"),
-                 _proof(None, "Average Time to Financial Clarity", count="30", suffix=" Days"),
+                 _proof(None, "In Capital Raised", count="35", prefix="$", suffix="M+"),
                  _proof(None, "Investor-Ready Reporting", count="100", suffix="%"),
                  _proof(None, "Average DSO Improvement", count="14", suffix=" Days"),
              ])
@@ -179,9 +179,9 @@ HERO_STATS = """<div class="hero-stats">
       <div class="hs-lbl">Client Monthly Recurring Revenue</div>
     </div>
     <div class="hs-item">
-      <span class="hs-num"><span data-count-to="30" data-suffix=" Days">0 Days</span></span>
+      <span class="hs-num"><span data-count-to="35" data-prefix="$" data-suffix="M+">$0M+</span></span>
       <div class="hs-rule"></div>
-      <div class="hs-lbl">Average Time to Financial Clarity</div>
+      <div class="hs-lbl">In Capital Raised</div>
     </div>
     <div class="hs-item">
       <span class="hs-num"><span data-count-to="14" data-suffix=" Days">0 Days</span></span>
