@@ -160,6 +160,112 @@
     });
   });
 
+  /* Tax news cards, fetched from the aggregator function.
+
+     Feed content is third-party text: every value is written with
+     textContent or setAttribute, never innerHTML, so a hostile title or
+     excerpt cannot inject markup into the page. */
+  var newsLists = document.querySelectorAll('.news-list');
+  if (newsLists.length) {
+    (function () {
+      var endpoint = newsLists[0].getAttribute('data-endpoint') || '/api/tax-news';
+
+      var setStatus = function (list, message) {
+        list.setAttribute('aria-busy', 'false');
+        list.textContent = '';
+        var p = document.createElement('p');
+        p.className = 'news-status';
+        p.textContent = message;
+        list.appendChild(p);
+      };
+
+      var formatDate = function (iso) {
+        if (!iso) return '';
+        var d = new Date(iso);
+        if (isNaN(d.getTime())) return '';
+        try {
+          return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        } catch (e) {
+          return d.toISOString().slice(0, 10);
+        }
+      };
+
+      var card = function (item) {
+        var a = document.createElement('a');
+        a.className = 'news-card';
+        a.href = item.link;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+
+        var meta = document.createElement('div');
+        meta.className = 'news-meta';
+        var src = document.createElement('span');
+        src.className = 'news-source';
+        src.textContent = item.source || '';
+        meta.appendChild(src);
+        var when = formatDate(item.date);
+        if (when) {
+          var sep = document.createElement('span');
+          sep.className = 'news-sep';
+          sep.textContent = '·';
+          var time = document.createElement('time');
+          time.className = 'news-date';
+          time.setAttribute('datetime', item.date);
+          time.textContent = when;
+          meta.appendChild(sep);
+          meta.appendChild(time);
+        }
+        a.appendChild(meta);
+
+        var h = document.createElement('h3');
+        h.className = 'news-title';
+        h.textContent = item.title || '';
+        a.appendChild(h);
+
+        if (item.excerpt) {
+          var p = document.createElement('p');
+          p.className = 'news-excerpt';
+          p.textContent = item.excerpt;
+          a.appendChild(p);
+        }
+
+        var more = document.createElement('span');
+        more.className = 'news-more';
+        more.textContent = 'Read more →';
+        a.appendChild(more);
+        return a;
+      };
+
+      var render = function (items) {
+        newsLists.forEach(function (list) {
+          if (!items.length) {
+            setStatus(list, 'Headlines are unavailable right now. Please check back shortly.');
+            return;
+          }
+          var limit = parseInt(list.getAttribute('data-limit'), 10) || items.length;
+          var frag = document.createDocumentFragment();
+          items.slice(0, limit).forEach(function (item) { frag.appendChild(card(item)); });
+          list.setAttribute('aria-busy', 'false');
+          list.textContent = '';
+          list.appendChild(frag);
+        });
+      };
+
+      if (typeof fetch !== 'function') {
+        newsLists.forEach(function (l) { setStatus(l, 'Headlines are unavailable right now. Please check back shortly.'); });
+        return;
+      }
+
+      fetch(endpoint, { headers: { Accept: 'application/json' } })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.status);
+          return res.json();
+        })
+        .then(function (data) { render((data && data.items) || []); })
+        .catch(function () { render([]); });
+    })();
+  }
+
   /* Footer year */
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();

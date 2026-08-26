@@ -25,6 +25,12 @@ GHL_FORM_NAME = "Website Form (Ocg financial)"
 CHAT_WIDGET_ID = "6a73733a57d382a077db770f"
 GHL_FORM_SCRIPT = '<script src="https://link.msgsndr.com/js/form_embed.js"></script>'
 
+# "Subscribe for Tax & Financial Updates" — a SECOND, different GHL form
+# from the contact form above. Set this to its form ID once Oscar confirms
+# it; until then the page renders a reserved slot instead of a wrong form.
+GHL_SUBSCRIBE_FORM_ID = None
+GHL_SUBSCRIBE_FORM_NAME = "Subscribe for Tax & Financial Updates"
+
 # Verified business contact details. OCG Financial has no public street
 # address, so none is published and none appears in structured data.
 PHONE_DISPLAY = "(210) 416-3919"
@@ -267,11 +273,14 @@ FUNDING_PATH = """<div class="fund-path reveal">
 
 
 
-def ghl_form(heading, blurb, extra_class="", heading_size="23px"):
+def ghl_form(heading, blurb, extra_class="", heading_size="23px",
+             form_id=None, form_name=None):
     """The live GoHighLevel intake form, wrapped in the site's panel so it
     keeps the surrounding spacing. form_embed.js resizes the iframe to fit
     its content; the inline height is the starting value GHL supplies, so
     the form is still usable if that script fails to load."""
+    form_id = form_id or GHL_FORM_ID
+    form_name = form_name or GHL_FORM_NAME
     cls = ("contact-form-panel has-embed " + extra_class).strip()
     return ('<div class="%s">\n'
             '  <h2 style="font-size:%s;">%s</h2>\n'
@@ -296,6 +305,23 @@ def ghl_form(heading, blurb, extra_class="", heading_size="23px"):
                         GHL_FORM_ID, GHL_FORM_HEIGHT, GHL_FORM_ID,
                         GHL_FORM_NAME, GHL_FORM_HEIGHT, GHL_FORM_ID,
                         GHL_FORM_ID, GHL_FORM_NAME))
+
+
+def ghl_subscribe():
+    """The "Subscribe for Tax & Financial Updates" embed. Until Oscar
+    confirms that form's ID, render a clearly-marked reserved slot rather
+    than embedding the wrong form."""
+    if GHL_SUBSCRIBE_FORM_ID:
+        return ghl_form("Subscribe for updates",
+                        "Tax and reporting changes that actually affect owner-run businesses.",
+                        extra_class="reveal reveal-delay-1",
+                        form_id=GHL_SUBSCRIBE_FORM_ID,
+                        form_name=GHL_SUBSCRIBE_FORM_NAME)
+    return ghl_slot(
+        "form", "Subscribe form goes here",
+        "Reserved for the &ldquo;Subscribe for Tax &amp; Financial Updates&rdquo; form. "
+        "Set GHL_SUBSCRIBE_FORM_ID in build.py to its form ID and it drops straight in, "
+        "with no layout changes.", tall=True)
 
 
 def slugify(v):
@@ -451,7 +477,7 @@ def nav(meta):
         </div>
       </li>
       <li><a href="{p}industries.html"{curattr('industries')}>Industries</a></li>
-      <li><a href="{p}resources.html"{curattr('resources')}>Resources</a></li>
+      <li><a href="{p}tax-news.html"{curattr('tax-news')}>Resources</a></li>
       <li><a href="{p}contact.html"{curattr('contact')}>Contact</a></li>
     </ul>
     <a href="{BOOK}" target="_blank" rel="noopener" class="btn btn-gold nav-cta">Schedule a Consultation</a>
@@ -475,7 +501,7 @@ def nav(meta):
     </div>
   </div>
   <a href="{p}industries.html">Industries</a>
-  <a href="{p}resources.html">Resources</a>
+  <a href="{p}tax-news.html">Resources</a>
   <a href="{p}contact.html">Contact</a>
   <a href="{BOOK}" target="_blank" rel="noopener" class="btn btn-gold">Schedule a Consultation</a>
 </div>
@@ -556,7 +582,7 @@ def footer(meta, has_form=False):
       <div class="footer-col">
         <h5>Resources</h5>
         <ul>
-          <li><a href="{p}resources.html">Insights</a></li>
+          <li><a href="{p}tax-news.html">Tax News</a></li>
           <li><a href="{p}faqs.html">FAQs</a></li>
         </ul>
         <h5 style="margin-top:26px;">Legal</h5>
@@ -641,6 +667,7 @@ def build_page(meta):
             "Talk to us about your %s business" % city,
             "We reply personally, usually within one business day.",
             extra_class="reveal reveal-delay-1"))
+    body = body.replace("{{ghl_subscribe}}", ghl_subscribe())
     body = body.replace("{{ghl_calendar}}", ghl_slot(
         "calendar", "Booking calendar goes here",
         "Reserved for the live scheduling calendar. Until it is embedded, the consultation buttons on "
@@ -653,7 +680,7 @@ def build_page(meta):
     schema.extend(meta.get("schema", []))
     meta = dict(meta, schema=schema)
 
-    has_form = 'id="inline-%s"' % GHL_FORM_ID in body
+    has_form = 'class="ghl-form"' in body
     html = head(meta) + nav(meta) + "\n<main>\n" + body + "\n</main>\n\n" + footer(meta, has_form)
     html = clean_links(html)
     out = os.path.join(ROOT, meta["out"])

@@ -1,0 +1,84 @@
+<!--
+  Tax News & Resources. The article list is fetched at runtime from
+  /api/tax-news (a Vercel serverless function that aggregates the RSS
+  feeds and is cached for four hours). Nothing here is hand-maintained.
+-->
+<section class="page-hero loc-hero">
+  <div class="container">
+    {{crumbs}}
+    <span class="eyebrow">Tax News &amp; Resources</span>
+    <h1>What's Moving in <span class="grad-text">Tax &amp; Accounting</span></h1>
+    <p class="lead">Headlines from the publications we read ourselves, gathered in one place and refreshed through the day. Follow any story back to its source.</p>
+    <p class="news-disclaimer">For general informational purposes only.</p>
+  </div>
+</section>
+
+<section class="sec first" style="border-top:none;">
+  <div class="container">
+    <div class="video-feature reveal">
+      <div class="vf-player" data-wistia="8fhufznvpy">
+        <button class="vf-poster" type="button" data-title="An Introduction to OCG Financial" aria-label="Play video: An Introduction to OCG Financial">
+          <img src="https://embed-ssl.wistia.com/deliveries/305a63d70b563e95185dc4547114b9d2.jpg?image_crop_resized=1280x720" alt="" width="1280" height="720" loading="lazy">
+          <span class="vf-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><path d="M6 4l14 8-14 8V4z"/></svg></span>
+        </button>
+      </div>
+      <div class="vf-meta">
+        <div class="topic">Watch First</div>
+        <h3>An Introduction to OCG Financial</h3>
+        <p>A short overview of what OCG does and who it is built for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" aria-label="Latest tax and accounting news">
+  <div class="container">
+    <div class="section-head centered reveal">
+      <span class="eyebrow">The Feed</span>
+      <h2>Latest Tax &amp; Financial Updates</h2>
+      <p>Pulled automatically from the Journal of Accountancy, Accounting Today, CPA Practice Advisor, and Thomson Reuters. We do not edit or rewrite the headlines.</p>
+    </div>
+    <div class="news-list" id="taxNewsFull" data-limit="20" aria-live="polite" aria-busy="true">
+      <p class="news-status">Loading the latest headlines…</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-label="Subscribe for updates">
+  <div class="container split">
+    <div class="body-copy reveal">
+      <span class="eyebrow">Stay Current</span>
+      <h2>Get the Updates That Actually Affect You</h2>
+      <p>Tax and reporting rules move constantly, and most of it is noise. Leave your details and we will let you know when something changes that genuinely matters for owner-run businesses.</p>
+      <p>No obligation, and you can unsubscribe at any time.</p>
+    </div>
+    {{ghl_subscribe}}
+  </div>
+</section>
+
+<section class="sec alt" aria-label="Written guides">
+  <div class="container">
+    <div class="section-head centered reveal">
+      <span class="eyebrow">From Us</span>
+      <h2>Written Guides</h2>
+      <p>Longer pieces we wrote ourselves, for owners who would rather read than skim headlines.</p>
+    </div>
+    <div class="benefit-grid reveal" style="max-width:1080px;margin:0 auto;">
+      <a class="benefit-card" href="{{p}}resources/cash-flow-mistakes.html">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></div>
+        <h3>The Cash Flow Mistakes Most Owners Make</h3>
+        <p>Where cash quietly leaks out of a growing business, and how each leak gets caught early.</p>
+      </a>
+      <a class="benefit-card" href="{{p}}resources/profit-vs-cash.html">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Why Profitable Businesses Still Run Out of Cash</h3>
+        <p>Profit on paper and money in the bank run on two different schedules. Growth widens the gap.</p>
+      </a>
+      <a class="benefit-card" href="{{p}}resources/bookkeeping-to-cfo.html">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+        <h3>When Bookkeeping Alone Isn't Enough Anymore</h3>
+        <p>The point where accurate books stop answering the questions the business is actually asking.</p>
+      </a>
+    </div>
+  </div>
+</section>

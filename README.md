@@ -33,12 +33,13 @@ Local preview that mirrors Vercel's clean-URL behavior: `npx serve .`
 | Path | Purpose |
 | --- | --- |
 | `index.html` | Homepage |
-| `about.html`, `contact.html`, `faqs.html`, `industries.html`, `client-results.html`, `resources.html` | Core pages |
+| `about.html`, `contact.html`, `faqs.html`, `industries.html`, `client-results.html`, `tax-news.html` | Core pages |
 | `privacy-policy.html`, `terms-of-service.html` | Legal |
 | `services/*.html` | Four service pages: bookkeeping, fractional CFO, business funding, tax preparation |
 | `locations/index.html` | Markets hub |
 | `locations/*.html` | Eight market pages: New York City, San Francisco, Boston, Chicago, Dallas, Miami, Los Angeles, Washington DC |
 | `resources/*.html` | Long-form guides |
+| `api/tax-news.js` | Serverless RSS aggregator behind `/tax-news` |
 | `build/` | Sources the pages are generated from (see "Editing the site") |
 | `scripts/fetch-images.sh` | Pulls images off the Wix CDN and hosts them locally |
 | `vercel.json` | Clean URLs, caching, security headers, and 301s for retired URLs |
@@ -95,7 +96,10 @@ background to transparent (or dark) in GHL.
 
 **Still to come.**
 
-- Video embeds for the three reserved slots near the top of `/resources`.
+- The GHL form ID for "Subscribe for Tax & Financial Updates". Set
+  `GHL_SUBSCRIBE_FORM_ID` in `build.py`; until then `/tax-news` and the
+  homepage news section show a reserved slot in its place.
+- Confirm the RSS feed URLs once (see "Tax News" above).
 - The logo is a vector re-creation of the supplied artwork; swap in the
   original file (see above) if exact reproduction matters.
 
@@ -103,6 +107,42 @@ background to transparent (or dark) in GHL.
 `https://www.ocgfinancial.com/`, which is where this site is intended to
 live. No change needed. If it is ever served from a different domain, those
 three places must be updated together.
+
+## Tax News
+
+`/tax-news` and the homepage preview section are populated at runtime from
+`api/tax-news.js`, a Vercel serverless function that pulls the configured
+RSS feeds, normalizes each item to `{ title, source, date, excerpt, link }`,
+dedupes by link, sorts newest first and returns the top 20. Each feed is
+fetched inside its own try/catch, and each source lists fallback URLs, so a
+publisher moving or breaking one feed never takes down the rest.
+
+Freshness comes from the CDN rather than a framework. The function sends
+`Cache-Control: public, s-maxage=14400, stale-while-revalidate=86400`, which
+is the direct equivalent of Next.js's `export const revalidate = 14400`:
+Vercel serves a cached response for four hours, then refreshes in the
+background while still serving the previous copy, so nobody waits on the
+upstream feeds.
+
+**Verify the feed URLs after the first deploy** by opening:
+
+```
+https://<your-domain>/api/tax-news?debug=1
+```
+
+It reports, per source, which candidate URL answered and why any failed.
+Fix or replace any source showing zero items by editing `SOURCES` at the top
+of `api/tax-news.js`. The URLs shipped are the conventional paths for each
+publication but could not be reached from the build environment, so this
+check is worth doing once.
+
+Excerpts are the feed's own summary, capped at ~150 characters — never the
+full article body, and never machine-generated. Every headline links out to
+the publisher. Feed text is rendered with `textContent`, never `innerHTML`,
+so nothing in a third-party feed can inject markup into the page.
+
+`package.json` exists only so Vercel installs `rss-parser` for this
+function; the pages themselves still have no build step.
 
 ## Editing the site
 
