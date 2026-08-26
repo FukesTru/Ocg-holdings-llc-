@@ -477,7 +477,7 @@ def nav(meta):
         </div>
       </li>
       <li><a href="{p}industries.html"{curattr('industries')}>Industries</a></li>
-      <li><a href="{p}tax-news.html"{curattr('tax-news')}>Resources</a></li>
+      <li><a href="{p}tax-news.html"{curattr('tax-news')}>News</a></li>
       <li><a href="{p}contact.html"{curattr('contact')}>Contact</a></li>
     </ul>
     <a href="{BOOK}" target="_blank" rel="noopener" class="btn btn-gold nav-cta">Schedule a Consultation</a>
@@ -501,7 +501,7 @@ def nav(meta):
     </div>
   </div>
   <a href="{p}industries.html">Industries</a>
-  <a href="{p}tax-news.html">Resources</a>
+  <a href="{p}tax-news.html">News</a>
   <a href="{p}contact.html">Contact</a>
   <a href="{BOOK}" target="_blank" rel="noopener" class="btn btn-gold">Schedule a Consultation</a>
 </div>
@@ -580,9 +580,9 @@ def footer(meta, has_form=False):
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Resources</h5>
+        <h5>News</h5>
         <ul>
-          <li><a href="{p}tax-news.html">Tax News</a></li>
+          <li><a href="{p}tax-news.html">Latest News</a></li>
           <li><a href="{p}faqs.html">FAQs</a></li>
         </ul>
         <h5 style="margin-top:26px;">Legal</h5>

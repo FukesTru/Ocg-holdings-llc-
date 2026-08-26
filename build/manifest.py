@@ -108,9 +108,9 @@ PAGES = [
     ),
     dict(
         out="tax-news.html", prefix="", nav="insights", fragment="tax-news.html", priority="0.8",
-        title="Tax News & Resources for Business Owners | OCG Financial",
+        title="Tax & Accounting News for Business Owners | OCG Financial",
         desc="Tax and accounting headlines from the Journal of Accountancy, Accounting Today, CPA Practice Advisor and Thomson Reuters, gathered in one place and refreshed daily.",
-        crumbs=[("Tax News", None)],
+        crumbs=[("News", None)],
     ),
     dict(
         out="privacy-policy.html", prefix="", nav="", fragment="privacy.html", priority="0.3",
@@ -250,6 +250,6 @@ for slug, title, desc, date in _ARTICLES:
         out="resources/%s.html" % slug, prefix="../", nav="insights", fragment="art-%s.html" % slug, priority="0.6",
         title="%s | OCG Financial" % title,
         desc=desc,
-        crumbs=[("Tax News", "tax-news.html"), (title[:46] + ("…" if len(title) > 46 else ""), None)],
+        crumbs=[("News", "tax-news.html"), (title[:46] + ("…" if len(title) > 46 else ""), None)],
         schema=[article_schema(title, slug, desc, date)],
     ))
