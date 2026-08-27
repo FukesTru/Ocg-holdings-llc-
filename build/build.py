@@ -27,7 +27,7 @@ GHL_FORM_SCRIPT = '<script src="https://link.msgsndr.com/js/form_embed.js"></scr
 
 # "Subscribe for Tax & Financial Updates" — a SECOND, different GHL form
 # from the contact form above. Set this to its form ID once Oscar confirms
-# it; until then the page renders a reserved slot instead of a wrong form.
+# it; until then the news pages run the contact form instead.
 GHL_SUBSCRIBE_FORM_ID = None
 GHL_SUBSCRIBE_FORM_NAME = "Subscribe for Tax & Financial Updates"
 
@@ -308,20 +308,19 @@ def ghl_form(heading, blurb, extra_class="", heading_size="23px",
 
 
 def ghl_subscribe():
-    """The "Subscribe for Tax & Financial Updates" embed. Until Oscar
-    confirms that form's ID, render a clearly-marked reserved slot rather
-    than embedding the wrong form."""
+    """The form on the news pages. Uses the dedicated "Subscribe for Tax &
+    Financial Updates" form once its ID is set; until then it runs the same
+    contact form as the rest of the site, so the slot is always a working
+    form rather than a placeholder."""
     if GHL_SUBSCRIBE_FORM_ID:
         return ghl_form("Subscribe for updates",
                         "Tax and reporting changes that actually affect owner-run businesses.",
                         extra_class="reveal reveal-delay-1",
                         form_id=GHL_SUBSCRIBE_FORM_ID,
                         form_name=GHL_SUBSCRIBE_FORM_NAME)
-    return ghl_slot(
-        "form", "Subscribe form goes here",
-        "Reserved for the &ldquo;Subscribe for Tax &amp; Financial Updates&rdquo; form. "
-        "Set GHL_SUBSCRIBE_FORM_ID in build.py to its form ID and it drops straight in, "
-        "with no layout changes.", tall=True)
+    return ghl_form("Send Oscar a message",
+                    "We reply personally, usually within one business day.",
+                    extra_class="reveal reveal-delay-1")
 
 
 def slugify(v):
