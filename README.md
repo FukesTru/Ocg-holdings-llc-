@@ -136,6 +136,16 @@ of `api/tax-news.js`. The URLs shipped are the conventional paths for each
 publication but could not be reached from the build environment, so this
 check is worth doing once.
 
+Items are then narrowed by a relevance filter, since these publications
+also run firm-management, staffing, conference and vendor stories that have
+nothing to do with what OCG does. An item is kept only if its title or
+excerpt touches tax, accounting and reporting, or the money mechanics of
+running a business; events, awards, people moves and sponsored posts are
+dropped. Both lists live in `TOPIC_PATTERNS` and `EXCLUDE_PATTERNS` at the
+top of `api/tax-news.js`, and `?debug=1` reports how many items were
+fetched versus kept. If the filter ever rejects everything, the unfiltered
+list is shown rather than an empty page.
+
 Excerpts are the feed's own summary, capped at ~150 characters — never the
 full article body, and never machine-generated. Every headline links out to
 the publisher. Feed text is rendered with `textContent`, never `innerHTML`,

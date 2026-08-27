@@ -233,6 +233,10 @@
         more.className = 'news-more';
         more.textContent = 'Read more →';
         a.appendChild(more);
+
+        var bar = document.createElement('span');
+        bar.className = 'news-bar';
+        a.appendChild(bar);
         return a;
       };
 
@@ -244,7 +248,12 @@
           }
           var limit = parseInt(list.getAttribute('data-limit'), 10) || items.length;
           var frag = document.createDocumentFragment();
-          items.slice(0, limit).forEach(function (item) { frag.appendChild(card(item)); });
+          items.slice(0, limit).forEach(function (item, i) {
+            var el = card(item);
+            /* The newest story leads at full width. */
+            if (i === 0) el.classList.add('is-lead');
+            frag.appendChild(el);
+          });
           list.setAttribute('aria-busy', 'false');
           list.textContent = '';
           list.appendChild(frag);

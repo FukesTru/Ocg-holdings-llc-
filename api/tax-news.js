@@ -64,6 +64,50 @@ const SOURCES = [
   },
 ];
 
+/**
+ * Relevance filter. These are trade publications, so they also carry firm
+ * management, staffing, conference and vendor news that has nothing to do
+ * with what OCG does. An item is kept only if its title or excerpt touches
+ * accounting, tax, or the money mechanics of running a business — the four
+ * things OCG actually works on.
+ */
+const TOPIC_PATTERNS = [
+  // Tax
+  /\btax(es|ation|payer|payers)?\b/i, /\bIRS\b/i, /\bfiling\b/i, /\bdeduction/i,
+  /\bcredit(s)?\b.*\b(tax|refund)\b/i, /\breturn(s)? \b/i, /\bwithhold/i,
+  /\bdepreciation\b/i, /\bnexus\b/i, /\bsales tax\b/i, /\bpayroll\b/i,
+  /\bestimated payment/i, /\bTreasury\b/i, /\bTCJA\b/i, /\bexemption/i,
+  // Accounting, audit and reporting
+  /\baccounting\b/i, /\bbookkeep/i, /\baudit(s|ing|or|ors)?\b/i, /\bGAAP\b/i,
+  /\bFASB\b/i, /\bIASB\b/i, /\bIFRS\b/i, /\bAICPA\b/i, /\bPCAOB\b/i, /\bSEC\b/,
+  /\bfinancial (statement|report|reporting|disclosure)/i, /\bclose\b.*\bmonth/i,
+  /\breconcil/i, /\bledger\b/i, /\bCPA(s)?\b/, /\bcompliance\b/i, /\bdisclosure/i,
+  // The money mechanics of running a business
+  /\bcash flow\b/i, /\bworking capital\b/i, /\bmargin(s)?\b/i, /\bprofitab/i,
+  /\bsmall business(es)?\b/i, /\bsmall-business\b/i, /\bSMB\b/, /\bbusiness owner/i,
+  /\bfunding\b/i, /\blending\b/i, /\blender/i, /\bloan(s)?\b/i, /\bcapital\b/i,
+  /\bCFO\b/, /\bforecast/i, /\binventory\b/i, /\breceivable/i, /\bvaluation\b/i,
+  /\bBOI\b/, /\bbeneficial ownership\b/i, /\bentity\b/i, /\bfranchise\b/i,
+];
+
+/**
+ * Trade-press noise that clears the topic filter on a keyword but is not
+ * industry news: events, awards, hiring announcements, product marketing.
+ */
+const EXCLUDE_PATTERNS = [
+  /\bwebinar\b/i, /\bpodcast\b/i, /\bconference\b/i, /\bregister (now|today)\b/i,
+  /\bawards?\b/i, /\bbest (firms|places to work)\b/i, /\btop \d+ (firms|accountants)\b/i,
+  /\bpromot(es|ed|ion) to\b/i, /\bnames? new (partner|CEO|CFO|director)\b/i,
+  /\bjoins? (the )?firm\b/i, /\bhires\b/i, /\bobituary\b/i, /\bin memoriam\b/i,
+  /\bsponsored\b/i, /\badvertisement\b/i, /\bnow available\b/i,
+];
+
+function isRelevant(item) {
+  var haystack = ((item.title || '') + ' ' + (item.excerpt || ''));
+  if (EXCLUDE_PATTERNS.some(function (re) { return re.test(haystack); })) return false;
+  return TOPIC_PATTERNS.some(function (re) { return re.test(haystack); });
+}
+
 const parser = new Parser({
   timeout: FETCH_TIMEOUT_MS,
   headers: { 'User-Agent': 'OCGFinancialSite/1.0 (+https://www.ocgfinancial.com/)' },
@@ -171,7 +215,16 @@ async function getTaxNews() {
     return b.date.localeCompare(a.date);
   });
 
-  return { items: deduped.slice(0, MAX_ITEMS), diagnostics: diagnostics };
+  var relevant = deduped.filter(isRelevant);
+  // Never hand back an empty page when the feeds themselves worked; if the
+  // filter somehow rejects everything, show the unfiltered list instead.
+  var chosen = relevant.length ? relevant : deduped;
+
+  return {
+    items: chosen.slice(0, MAX_ITEMS),
+    diagnostics: diagnostics,
+    filtered: { fetched: deduped.length, kept: relevant.length, usedFallback: !relevant.length && deduped.length > 0 },
+  };
 }
 
 module.exports = async function handler(req, res) {
@@ -186,6 +239,7 @@ module.exports = async function handler(req, res) {
     var body = { items: result.items, count: result.items.length, updated: new Date().toISOString() };
     if (debug) {
       body.diagnostics = result.diagnostics;
+      body.filtered = result.filtered;
       // A health check should never be answered from cache.
       res.setHeader('Cache-Control', 'no-store');
     }
