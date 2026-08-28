@@ -96,9 +96,10 @@ background to transparent (or dark) in GHL.
 
 **Still to come.**
 
-- The GHL form ID for "Subscribe for Tax & Financial Updates". Set
-  `GHL_SUBSCRIBE_FORM_ID` in `build.py` and it replaces the contact form
-  that currently stands in on `/tax-news` and in the homepage news section.
+- The GHL form ID for "Subscribe for Tax & Financial Updates", if a
+  subscribe form is ever wanted on the news pages. `ghl_subscribe()` and the
+  `{{ghl_subscribe}}` token in `build.py` are wired and unused; set
+  `GHL_SUBSCRIBE_FORM_ID` and drop the token into a fragment.
 - Confirm the RSS feed URLs once (see "Tax News" above).
 - The logo is a vector re-creation of the supplied artwork; swap in the
   original file (see above) if exact reproduction matters.
