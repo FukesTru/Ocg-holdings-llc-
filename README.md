@@ -143,9 +143,16 @@ nothing to do with what OCG does. An item is kept only if its title or
 excerpt touches tax, accounting and reporting, or the money mechanics of
 running a business; events, awards, people moves and sponsored posts are
 dropped. Both lists live in `TOPIC_PATTERNS` and `EXCLUDE_PATTERNS` at the
-top of `api/tax-news.js`, and `?debug=1` reports how many items were
-fetched versus kept. If the filter ever rejects everything, the unfiltered
-list is shown rather than an empty page.
+top of `api/tax-news.js`. Matching is deliberately strict: a headline needs
+a genuinely domain-specific term, not a word that merely appears in
+financial writing, and nothing off-topic is ever shown as a fallback — if
+no item qualifies the page says so instead.
+
+`?debug=1` reports fetched-versus-kept counts **and lists every rejected
+headline**, which is the fastest way to tune the patterns against the live
+feed: anything off-topic still appearing on the page means adding a term to
+`EXCLUDE_PATTERNS`, and anything useful in the rejected list means adding
+one to `TOPIC_PATTERNS`.
 
 Excerpts are the feed's own summary, capped at ~150 characters — never the
 full article body, and never machine-generated. Every headline links out to

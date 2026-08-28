@@ -72,34 +72,62 @@ const SOURCES = [
  * things OCG actually works on.
  */
 const TOPIC_PATTERNS = [
-  // Tax
-  /\btax(es|ation|payer|payers)?\b/i, /\bIRS\b/i, /\bfiling\b/i, /\bdeduction/i,
-  /\bcredit(s)?\b.*\b(tax|refund)\b/i, /\breturn(s)? \b/i, /\bwithhold/i,
-  /\bdepreciation\b/i, /\bnexus\b/i, /\bsales tax\b/i, /\bpayroll\b/i,
-  /\bestimated payment/i, /\bTreasury\b/i, /\bTCJA\b/i, /\bexemption/i,
-  // Accounting, audit and reporting
-  /\baccounting\b/i, /\bbookkeep/i, /\baudit(s|ing|or|ors)?\b/i, /\bGAAP\b/i,
-  /\bFASB\b/i, /\bIASB\b/i, /\bIFRS\b/i, /\bAICPA\b/i, /\bPCAOB\b/i, /\bSEC\b/,
-  /\bfinancial (statement|report|reporting|disclosure)/i, /\bclose\b.*\bmonth/i,
-  /\breconcil/i, /\bledger\b/i, /\bCPA(s)?\b/, /\bcompliance\b/i, /\bdisclosure/i,
-  // The money mechanics of running a business
-  /\bcash flow\b/i, /\bworking capital\b/i, /\bmargin(s)?\b/i, /\bprofitab/i,
+  // --- Tax ---
+  /\btax(es|ation|payer|payers|able)?\b/i, /\bIRS\b/, /\bTreasury\b/i, /\bTCJA\b/,
+  /\btax return/i, /\bfiling season\b/i, /\bdeduction/i, /\bdepreciation\b/i,
+  /\bwithhold/i, /\bnexus\b/i, /\bpayroll\b/i, /\bexemption/i, /\bK-1\b/,
+  /\bestimated payment/i, /\bamortization\b/i, /\bwrite-off/i,
+
+  // --- Accounting, audit and reporting ---
+  /\baccounting\b/i, /\baccountant/i, /\bbookkeep/i, /\baudit(s|ing|or|ors)?\b/i,
+  /\bGAAP\b/, /\bFASB\b/, /\bIASB\b/, /\bIFRS\b/, /\bAICPA\b/, /\bPCAOB\b/, /\bSEC\b/,
+  /\bCPA(s)?\b/, /\bfinancial (statement|report|reporting|disclosure|record)/i,
+  /\bmonth(-|\s)end close\b/i, /\bmonthly close\b/i, /\breconcil/i,
+  /\bgeneral ledger\b/i, /\bledger\b/i, /\bdisclosure/i, /\baccrual\b/i,
+  /\bbalance sheet\b/i, /\bincome statement\b/i, /\bchart of accounts\b/i,
+  /\bBOI\b/, /\bbeneficial ownership\b/i,
+
+  // --- The money mechanics of running a business (what OCG works on) ---
+  /\bcash flow\b/i, /\bworking capital\b/i, /\bliquidity\b/i,
+  /\b(gross|profit|operating|contribution) margin/i, /\bprofitab/i,
   /\bsmall business(es)?\b/i, /\bsmall-business\b/i, /\bSMB\b/, /\bbusiness owner/i,
-  /\bfunding\b/i, /\blending\b/i, /\blender/i, /\bloan(s)?\b/i, /\bcapital\b/i,
-  /\bCFO\b/, /\bforecast/i, /\binventory\b/i, /\breceivable/i, /\bvaluation\b/i,
-  /\bBOI\b/, /\bbeneficial ownership\b/i, /\bentity\b/i, /\bfranchise\b/i,
+  /\bfractional CFO\b/i, /\bCFO\b/, /\bcontroller\b/i,
+  /\bcash (flow )?forecast/i, /\bfinancial forecast/i, /\bforecasting\b/i,
+  /\baccounts receivable\b/i, /\breceivable/i, /\bpayable/i, /\bDSO\b/,
+  /\bvaluation\b/i, /\bdue diligence\b/i,
+
+  // --- Funding and lending (Oscar's funding-readiness work) ---
+  /\bbusiness (loan|lending|credit|funding)/i, /\bSBA\b/, /\blender/i,
+  /\bunderwriting\b/i, /\bline of credit\b/i, /\bworking capital loan/i,
+  /\bcapital (raise|raising|markets|gains|expenditure|structure)/i,
+  /\baccess to capital\b/i, /\bdebt financing\b/i,
+
+  // --- Entity and compliance matters owners actually face ---
+  /\bentity (structure|type|selection|level)/i, /\bpass-through entit/i,
+  /\bS corp/i, /\bC corp/i, /\bLLC\b/, /\bfranchise tax\b/i,
+  /\bregulator|regulation|regulatory\b/i, /\bcompliance\b/i,
 ];
 
 /**
- * Trade-press noise that clears the topic filter on a keyword but is not
- * industry news: events, awards, hiring announcements, product marketing.
+ * Trade-press noise that can clear the topic filter on a keyword but is not
+ * industry news an owner needs: events, awards, hiring and people moves,
+ * vendor marketing, career and firm-culture pieces.
  */
 const EXCLUDE_PATTERNS = [
-  /\bwebinar\b/i, /\bpodcast\b/i, /\bconference\b/i, /\bregister (now|today)\b/i,
-  /\bawards?\b/i, /\bbest (firms|places to work)\b/i, /\btop \d+ (firms|accountants)\b/i,
-  /\bpromot(es|ed|ion) to\b/i, /\bnames? new (partner|CEO|CFO|director)\b/i,
-  /\bjoins? (the )?firm\b/i, /\bhires\b/i, /\bobituary\b/i, /\bin memoriam\b/i,
+  /\bwebinar\b/i, /\bpodcast\b/i, /\bconference\b/i, /\bsummit\b/i,
+  /\bregister (now|today|here)\b/i, /\bsave the date\b/i, /\bCPE\b/,
+  /\bcontinuing education\b/i, /\bcourse\b/i, /\bcertification exam\b/i,
+  /\baward(s|ed)?\b/i, /\bbest (firms|places to work|of)\b/i,
+  /\btop \d+\b/i, /\branking(s)?\b/i, /\bhonor(s|ed|ee)\b/i,
+  /\bpromot(es|ed|ion) to\b/i, /\bnames? new\b/i, /\bappoints?\b/i,
+  /\bjoins? (the )?firm\b/i, /\bhires\b/i, /\bnew partner(s)?\b/i,
+  /\bpeople (moves|on the move)\b/i, /\bobituary\b/i, /\bin memoriam\b/i,
   /\bsponsored\b/i, /\badvertisement\b/i, /\bnow available\b/i,
+  /\bannounces? (the )?(launch|release|availability)\b/i,
+  /\bpartners with\b/i, /\bintegrat(es|ion) with\b/i,
+  /\bhow to (grow|market|scale) your (firm|practice)\b/i,
+  /\bstaffing (shortage|crisis)\b/i, /\btalent (war|pipeline|shortage)\b/i,
+  /\bwork-life\b/i, /\bburnout\b/i, /\bremote work\b/i,
 ];
 
 function isRelevant(item) {
@@ -216,14 +244,17 @@ async function getTaxNews() {
   });
 
   var relevant = deduped.filter(isRelevant);
-  // Never hand back an empty page when the feeds themselves worked; if the
-  // filter somehow rejects everything, show the unfiltered list instead.
-  var chosen = relevant.length ? relevant : deduped;
 
   return {
-    items: chosen.slice(0, MAX_ITEMS),
+    items: relevant.slice(0, MAX_ITEMS),
     diagnostics: diagnostics,
-    filtered: { fetched: deduped.length, kept: relevant.length, usedFallback: !relevant.length && deduped.length > 0 },
+    filtered: {
+      fetched: deduped.length,
+      kept: relevant.length,
+      // What was thrown away, so the patterns can be tuned from the live feed.
+      rejected: deduped.filter(function (i) { return !isRelevant(i); })
+        .map(function (i) { return i.source + ': ' + i.title; }),
+    },
   };
 }
 
