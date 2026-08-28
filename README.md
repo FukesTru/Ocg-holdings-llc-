@@ -111,7 +111,7 @@ three places must be updated together.
 
 ## Tax News
 
-`/tax-news` and the homepage preview section are populated at runtime from
+`/tax-news` is populated at runtime from
 `api/tax-news.js`, a Vercel serverless function that pulls the configured
 RSS feeds, normalizes each item to `{ title, source, date, excerpt, link }`,
 dedupes by link, sorts newest first and returns the top 20. Each feed is
