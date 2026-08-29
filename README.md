@@ -162,6 +162,33 @@ so nothing in a third-party feed can inject markup into the page.
 `package.json` exists only so Vercel installs `rss-parser` for this
 function; the pages themselves still have no build step.
 
+## Performance notes
+
+A few things here are deliberate and worth not undoing:
+
+- **The chat widget is loaded lazily.** It is injected on the first real
+  interaction (pointer, key, touch, scroll or mouse move) or a few seconds
+  after the page settles, whichever comes first — see `CHAT_DELAY_MS` in
+  `build.py`. Third-party chat scripts are heavy, and loading it eagerly on
+  all 25 pages was the single largest drag on the mobile score. Behaviour
+  once loaded is identical.
+- **`form_embed.js` is deferred**, and only included on the nine pages that
+  actually render the form.
+- **Fonts** request only the weights the site uses (Inter 400-800, Cormorant
+  400/500/600 plus italic). Inter 300 was being requested and never used.
+  Check before adding a weight back:
+  `grep -o 'font-weight:[0-9]*' assets/css/styles.css | sort -u`, and note
+  the logo SVG in `build.py` needs Inter 800.
+- **Preconnects** are set for both font hosts and the image CDN.
+- Client logos and the founder photo carry `loading="lazy"` and explicit
+  `width`/`height`, so they neither block rendering nor shift the layout.
+
+**The biggest remaining win is the images.** They are still served at full
+resolution from the Wix CDN while displaying at 140x70. Running
+`scripts/fetch-images.sh` (see "Notes before launch") hosts them locally, at
+which point they can be resized once and cached properly by Vercel. That
+could not be done from the build environment, which has no route to that CDN.
+
 ## Editing the site
 
 The pages in this repo are **generated**. Do not hand-edit the HTML at the
