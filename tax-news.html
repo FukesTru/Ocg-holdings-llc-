@@ -15,7 +15,8 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -2 108 78'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0.35' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f0d078'/%3E%3Cstop offset='100%25' stop-color='%23c9a13b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='url(%23g)'%3E%3Cpath d='M10,64 A40,40 0 0 1 72.9,31.2' fill='none' stroke='url(%23g)' stroke-width='11'/%3E%3Crect x='24' y='51' width='6' height='13'/%3E%3Crect x='33' y='41' width='6' height='23'/%3E%3Crect x='42' y='33' width='6' height='31'/%3E%3Crect x='51' y='39' width='6' height='25'/%3E%3Crect x='60' y='35' width='6' height='29'/%3E%3Crect x='69' y='45' width='6' height='19'/%3E%3Cpath d='M22,55 L36,43 L47,48 L60,34 L78,17' fill='none' stroke='url(%23g)' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolygon points='90,6 85.1,23.7 72.3,10.9'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://static.wixstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=587107ee">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FinancialService", "name": "OCG Financial", "legalName": "OCG Holdings LLC", "url": "https://www.ocgfinancial.com/", "description": "Founder-led financial partner for business owners nationwide: fractional CFO services, bookkeeping, tax support, business funding, and financial strategy.", "areaServed": {"@type": "Country", "name": "United States"}, "founder": {"@type": "Person", "name": "Oscar Cancino", "sameAs": "https://www.linkedin.com/in/oscar-cancino-056694174/"}, "sameAs": ["https://www.linkedin.com/in/oscar-cancino-056694174/"], "telephone": "+12104163919", "email": "oscar@ocgfinancial.com", "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "telephone": "+12104163919", "email": "oscar@ocgfinancial.com", "areaServed": "US", "availableLanguage": "English"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.ocgfinancial.com/"}, {"@type": "ListItem", "position": 2, "name": "News", "item": "https://www.ocgfinancial.com/tax-news"}]}</script>
@@ -254,8 +255,30 @@
 
 <script src="/assets/js/main.js?v=88390ad1" defer></script>
 
-<!-- GoHighLevel chat widget -->
-<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a73733a57d382a077db770f"></script>
+<!-- GoHighLevel chat widget. Loaded off the critical path: on the first
+     real interaction, or a few seconds after the page has settled for
+     visitors who just read. Identical behaviour once it is in. -->
+<script>
+(function () {
+  var loaded = false;
+  var events = ['pointerdown', 'keydown', 'touchstart', 'scroll', 'mousemove'];
+  var opts = { passive: true };
+  function load() {
+    if (loaded) return;
+    loaded = true;
+    events.forEach(function (e) { window.removeEventListener(e, load, opts); });
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '6a73733a57d382a077db770f');
+    document.body.appendChild(s);
+  }
+  events.forEach(function (e) { window.addEventListener(e, load, opts); });
+  var idle = function () { setTimeout(load, 3500); };
+  if (document.readyState === 'complete') idle();
+  else window.addEventListener('load', idle);
+})();
+</script>
 
 </body>
 </html>

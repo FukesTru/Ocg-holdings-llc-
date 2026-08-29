@@ -23,7 +23,11 @@ GHL_FORM_ID = "e657dYZaPQCYeCeeZpp2"
 GHL_FORM_HEIGHT = "542"
 GHL_FORM_NAME = "Website Form (Ocg financial)"
 CHAT_WIDGET_ID = "6a73733a57d382a077db770f"
-GHL_FORM_SCRIPT = '<script src="https://link.msgsndr.com/js/form_embed.js"></script>'
+# How long after load to bring the chat widget in for visitors who
+# never interact. Any earlier and it lands inside the measured
+# window that page-speed tools score.
+CHAT_DELAY_MS = 3500
+GHL_FORM_SCRIPT = '<script src="https://link.msgsndr.com/js/form_embed.js" defer></script>'
 
 # "Subscribe for Tax & Financial Updates" — a SECOND, different GHL form
 # from the contact form above. Set this to its form ID once Oscar confirms
@@ -419,7 +423,8 @@ def head(meta):
 <link rel="icon" href="{FAVICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://static.wixstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{p}assets/css/styles.css?v={CSS_V}">
 {schema_blocks}
 </head>
@@ -603,8 +608,30 @@ def footer(meta, has_form=False):
 
 <script src="{p}assets/js/main.js?v={JS_V}" defer></script>
 {form_script}
-<!-- GoHighLevel chat widget -->
-<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="{CHAT_WIDGET_ID}"></script>
+<!-- GoHighLevel chat widget. Loaded off the critical path: on the first
+     real interaction, or a few seconds after the page has settled for
+     visitors who just read. Identical behaviour once it is in. -->
+<script>
+(function () {{
+  var loaded = false;
+  var events = ['pointerdown', 'keydown', 'touchstart', 'scroll', 'mousemove'];
+  var opts = {{ passive: true }};
+  function load() {{
+    if (loaded) return;
+    loaded = true;
+    events.forEach(function (e) {{ window.removeEventListener(e, load, opts); }});
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '{CHAT_WIDGET_ID}');
+    document.body.appendChild(s);
+  }}
+  events.forEach(function (e) {{ window.addEventListener(e, load, opts); }});
+  var idle = function () {{ setTimeout(load, {CHAT_DELAY_MS}); }};
+  if (document.readyState === 'complete') idle();
+  else window.addEventListener('load', idle);
+}})();
+</script>
 
 </body>
 </html>
